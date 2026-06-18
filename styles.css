@@ -1232,7 +1232,7 @@ h6 {
 
   .syllabi-container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 32px;
   }
 
@@ -1242,6 +1242,12 @@ h6 {
     padding-right: 0;
     padding-bottom: 16px;
     width: 100%;
+    text-align: center;
+  }
+
+  .syllabi-left-title .header-line {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .syllabi-left-title h2 {
