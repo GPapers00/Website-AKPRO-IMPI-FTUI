@@ -1683,7 +1683,21 @@ h6 {
   .header__inner {
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
     position: relative;
+  }
+
+  .header__title {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .header__logo {
+    height: 32px;
+  }
+
+  .header__brand {
+    gap: 8px;
   }
 
   .header__tabs {
