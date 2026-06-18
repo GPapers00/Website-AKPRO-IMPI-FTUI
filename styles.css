@@ -1427,20 +1427,28 @@ h6 {
   position: relative;
   box-shadow: var(--shadow-md);
 }
+
 .home-banner::after {
   content: "Custom Home Banner Placeholder (1920x800)";
   color: rgba(255, 255, 255, 0.4);
   font-weight: 600;
   position: absolute;
 }
+
 .home-banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: none;
 }
-.home-banner:has(img[src]:not([src=""]))::after { display: none; }
-.home-banner:has(img[src]:not([src=""])) img { display: block; }
+
+.home-banner:has(img[src]:not([src=""]))::after {
+  display: none;
+}
+
+.home-banner:has(img[src]:not([src=""])) img {
+  display: block;
+}
 
 .home-content {
   display: flex;
@@ -1552,12 +1560,14 @@ h6 {
   overflow: hidden;
   position: relative;
 }
+
 .role-icon-box::after {
   content: 'Image';
   font-size: 12px;
   color: rgba(84, 155, 255, 0.5);
   position: absolute;
 }
+
 .role-img-placeholder {
   width: 100%;
   height: 100%;
@@ -1566,12 +1576,19 @@ h6 {
   position: relative;
   z-index: 2;
 }
+
 .role-icon-box:has(img[src]:not([src=""])) {
   border-style: solid;
   background: transparent;
 }
-.role-icon-box:has(img[src]:not([src=""]))::after { display: none; }
-.role-icon-box:has(img[src]:not([src=""])) img { opacity: 1; }
+
+.role-icon-box:has(img[src]:not([src=""]))::after {
+  display: none;
+}
+
+.role-icon-box:has(img[src]:not([src=""])) img {
+  opacity: 1;
+}
 
 .role-title {
   font-size: 24px;
@@ -1613,16 +1630,19 @@ h6 {
   color: var(--bear-brown);
   text-decoration: none;
 }
+
 .shortcut-btn:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.9);
   color: var(--cerulean-blue);
   box-shadow: var(--shadow-md);
 }
+
 .shortcut-btn .material-symbols-outlined {
   font-size: 48px;
   color: inherit;
 }
+
 .shortcut-btn h3 {
   font-size: 20px;
   font-weight: 800;
@@ -1631,11 +1651,120 @@ h6 {
 }
 
 @media (max-width: 1024px) {
-  .qna-row { flex-direction: column; gap: 24px; text-align: center; }
-  .qna-question { flex: none; }
+  .qna-row {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .qna-question {
+    flex: none;
+  }
+}
+
+/* ── Mobile & Hamburger Menu Styles ─────────────────────── */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1001;
 }
 
 @media (max-width: 768px) {
-  .roles-grid, .shortcuts-grid { grid-template-columns: 1fr; }
-  .home-banner { height: 400px; }
+
+  /* Hamburger Menu Toggle */
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .header__inner {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .header__tabs {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(77, 45, 24, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 80px 24px 24px;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .header__tabs.menu-open {
+    right: 0;
+  }
+
+  .tab-btn {
+    width: 100%;
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+
+  /* Banner adjustments */
+  .home-banner,
+  .tab-banner {
+    height: 300px;
+  }
+
+  /* Dynamic Header Adjustments */
+  .dynamic-header {
+    font-size: 32px;
+    top: 70px;
+    margin-top: -160px;
+    margin-bottom: 120px;
+    padding: 8px 32px;
+  }
+
+  /* General Grid Adjustments */
+  .shortcuts-grid,
+  .roles-grid,
+  .exchange-top-grid,
+  .exchange-bottom-grid.dept-grid,
+  .syllabi-right-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .qna-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .about-us-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-us-text {
+    text-align: center;
+  }
+
+  /* Modal optimization */
+  .modal-container {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .uni-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .uni-logo-col {
+    flex: none;
+    margin-bottom: 16px;
+  }
 }

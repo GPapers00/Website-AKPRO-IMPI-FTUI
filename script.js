@@ -26,6 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetPanel) {
         targetPanel.classList.add('active');
       }
+
+      // 5. Manage YouTube Video Playback
+      const youtubeIframe = document.querySelector('.about-us-video iframe');
+      if (youtubeIframe) {
+        if (targetTab === 'home') {
+          // Play video when returning to home tab
+          youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        } else {
+          // Pause video when leaving home tab
+          youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+      }
     });
   });
 
@@ -218,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlContent += `
               <div class="uni-card animate-up">
                 <div class="uni-logo-col">
-                  <img src="${uni.logo}" alt="${uni.name} Logo" class="uni-logo" onerror="this.src='logo.png'">
+                  <img src="${uni.logo}" alt="${uni.name} Logo" class="uni-logo" loading="lazy" onerror="this.src='logo.png'">
                   <span class="uni-country">${uni.country}</span>
                 </div>
                 <div class="uni-details-col">
@@ -505,7 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let html = `
           <div class="country-header">
-            <img src="https://raw.githubusercontent.com/hampusborgos/country-flags/main/svg/${countryItem.code}.svg" alt="${countryItem.country} flag" class="country-flag">
+            <img src="https://raw.githubusercontent.com/hampusborgos/country-flags/main/svg/${countryItem.code}.svg" alt="${countryItem.country} flag" class="country-flag" loading="lazy">
             <h3>${countryItem.country}</h3>
           </div>
           <ul class="country-univ-list">
@@ -649,5 +661,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     lastScrollY = currentScrollY;
   });
+
+  // ── Mobile Menu Toggle Logic ─────────────────────────────────
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const headerTabs = document.getElementById('header__tabs');
+
+  if (mobileMenuBtn && headerTabs) {
+    mobileMenuBtn.addEventListener('click', () => {
+      headerTabs.classList.toggle('menu-open');
+      if (headerTabs.classList.contains('menu-open')) {
+        mobileMenuBtn.textContent = 'close';
+      } else {
+        mobileMenuBtn.textContent = 'menu';
+      }
+    });
+
+    // Close menu when a tab is clicked
+    const tabBtns = headerTabs.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        headerTabs.classList.remove('menu-open');
+        mobileMenuBtn.textContent = 'menu';
+      });
+    });
+  }
 
 });

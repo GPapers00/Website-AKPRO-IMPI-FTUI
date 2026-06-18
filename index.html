@@ -46,14 +46,19 @@
         <span class="header__title">IMPI Academic Center</span>
       </div>
 
+      <!-- MOBILE MENU BUTTON -->
+      <button class="mobile-menu-btn material-symbols-outlined" id="mobile-menu-btn" aria-label="Toggle navigation"
+        style="display: none;">
+        menu
+      </button>
+
       <!-- NAVIGATION TABS -->
-      <nav class="header__tabs">
-        <button class="tab-btn" data-tab="home">Home</button>
+      <nav class="header__tabs" id="header__tabs">
+        <button class="tab-btn active" data-tab="home">Home</button>
         <button class="tab-btn" data-tab="asistensi">Asistensi</button>
         <button class="tab-btn" data-tab="diktat">Diktat</button>
         <button class="tab-btn" data-tab="calendar">Academic Calendar</button>
-        <!-- Exchange Information is default active -->
-        <button class="tab-btn active" data-tab="exchange">Exchange Information</button>
+        <button class="tab-btn" data-tab="exchange">Exchange Information</button>
         <button class="tab-btn" data-tab="contact">Contact Us</button>
       </nav>
 
@@ -68,10 +73,10 @@
     <!-- ──────────────────────────────────────────
          TAB 0: HOME PAGE
          ────────────────────────────────────────── -->
-    <section class="tab-panel" id="panel-home">
+    <section class="tab-panel active" id="panel-home">
       <!-- Massive 1920x800 Banner -->
       <div class="home-banner">
-        <!-- Add your 1920x800 banner image here later: <img src="your-banner.jpg" alt="Home Banner"> -->
+        <!-- Add your 1920x800 banner image here later: <img src="your-banner.jpg" alt="Home Banner" loading="lazy"> -->
       </div>
 
       <div class="home-content">
@@ -95,19 +100,21 @@
             <div class="roles-grid">
               <!-- Role 1 -->
               <div class="role-card">
-                <div class="role-icon-box"><img src="" alt="Advocate" class="role-img-placeholder"></div>
+                <div class="role-icon-box"><img src="" alt="Advocate" class="role-img-placeholder" loading="lazy"></div>
                 <h3 class="role-title">Advocate</h3>
                 <p class="role-desc">If you have any trouble for your Academics, AKPRO can be your attorney.</p>
               </div>
               <!-- Role 2 -->
               <div class="role-card">
-                <div class="role-icon-box"><img src="" alt="Study Center" class="role-img-placeholder"></div>
+                <div class="role-icon-box"><img src="" alt="Study Center" class="role-img-placeholder" loading="lazy">
+                </div>
                 <h3 class="role-title">Study Center</h3>
                 <p class="role-desc">AKPRO can help you study with the materials we provided through various means.</p>
               </div>
               <!-- Role 3 -->
               <div class="role-card">
-                <div class="role-icon-box"><img src="" alt="Study Information" class="role-img-placeholder"></div>
+                <div class="role-icon-box"><img src="" alt="Study Information" class="role-img-placeholder"
+                    loading="lazy"></div>
                 <h3 class="role-title">Study Information</h3>
                 <p class="role-desc">We will provide you with the latest news of the current academics information
                   including Student Exchange Information.</p>
@@ -141,10 +148,10 @@
           <div class="about-us-content">
             <div class="about-us-video">
               <!-- Placeholder for YouTube Video -->
-              <iframe width="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player"
-                frameborder="0"
+              <iframe width="100%" src="https://www.youtube.com/embed/bL37VCXWEzA?enablejsapi=1&mute=1&autoplay=1"
+                title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+                allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
             <div class="about-us-text">
               <h2>About Us</h2>
@@ -162,7 +169,7 @@
     <section class="tab-panel" id="panel-asistensi">
       <!-- Custom Banner Placeholder -->
       <div class="tab-banner">
-        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner"> -->
+        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner" loading="lazy"> -->
       </div>
       <!-- Header -->
       <h2 class="panel-header dynamic-header">Asistensi</h2>
@@ -174,7 +181,7 @@
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Video</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
-            <img src="video_image.jpg" alt="Video" class="landscape-image top-focus">
+            <img src="video_image.jpg" alt="Video" class="landscape-image top-focus" loading="lazy">
           </div>
         </a>
 
@@ -183,7 +190,7 @@
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Notes</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
-            <img src="notes_image.jpg" alt="Notes" class="landscape-image top-focus">
+            <img src="notes_image.jpg" alt="Notes" class="landscape-image top-focus" loading="lazy">
           </div>
         </a>
       </div>
@@ -195,7 +202,7 @@
     <section class="tab-panel" id="panel-diktat">
       <!-- Custom Banner Placeholder -->
       <div class="tab-banner">
-        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner"> -->
+        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner" loading="lazy"> -->
       </div>
       <!-- Header -->
       <h2 class="panel-header dynamic-header">Diktat</h2>
@@ -208,7 +215,7 @@
             style="display: block; text-decoration: none; color: inherit; width: 100%;">
             <h3>UAS Genap 2026</h3>
             <div class="image-link-wrapper" style="margin-bottom: 0;">
-              <img src="uas_genap_2026.jpg" alt="UAS Genap 2026" class="landscape-image top-focus">
+              <img src="uas_genap_2026.jpg" alt="UAS Genap 2026" class="landscape-image top-focus" loading="lazy">
             </div>
           </a>
           <a href="https://drive.google.com/drive/u/3/folders/11fYARgQe9KUlQvWI1TUL2Lbq5ZJyFlW_" target="_blank"
@@ -216,7 +223,7 @@
             style="display: block; text-decoration: none; color: inherit; width: 100%;">
             <h3>UTS Genap 2026</h3>
             <div class="image-link-wrapper" style="margin-bottom: 0;">
-              <img src="uts_genap_2026.jpg" alt="UTS Genap 2026" class="landscape-image top-focus">
+              <img src="uts_genap_2026.jpg" alt="UTS Genap 2026" class="landscape-image top-focus" loading="lazy">
             </div>
           </a>
         </div>
@@ -226,7 +233,8 @@
             style="display: block; text-decoration: none; color: inherit; width: 100%;">
             <h3>Archive Diktat Akpro IMPI</h3>
             <div class="image-link-wrapper" style="margin-bottom: 0;">
-              <img src="archive_diktat.jpg" alt="Archive Diktat Akpro IMPI" class="landscape-image top-focus">
+              <img src="archive_diktat.jpg" alt="Archive Diktat Akpro IMPI" class="landscape-image top-focus"
+                loading="lazy">
             </div>
           </a>
         </div>
@@ -239,7 +247,7 @@
     <section class="tab-panel" id="panel-calendar">
       <!-- Custom Banner Placeholder -->
       <div class="tab-banner">
-        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner"> -->
+        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner" loading="lazy"> -->
       </div>
       <h2 class="panel-header dynamic-header">Academic Calendar</h2>
 
@@ -252,7 +260,8 @@
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Odd Semester 2026/2027</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
-            <img src="calendar_image.jpg" alt="Academic Odd Semester 2026/2027" class="landscape-image top-focus">
+            <img src="calendar_image.jpg" alt="Academic Odd Semester 2026/2027" class="landscape-image top-focus"
+              loading="lazy">
           </div>
         </a>
 
@@ -262,7 +271,8 @@
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Past Academic Calendar</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
-            <img src="past_calendar_image.jpg" alt="Past Academic Calendar" class="landscape-image top-focus">
+            <img src="past_calendar_image.jpg" alt="Past Academic Calendar" class="landscape-image top-focus"
+              loading="lazy">
           </div>
         </a>
 
@@ -270,12 +280,12 @@
     </section>
 
     <!-- ──────────────────────────────────────────
-         TAB 4: EXCHANGE INFORMATION PAGE (DEFAULT)
+         TAB 4: EXCHANGE INFORMATION PAGE
          ────────────────────────────────────────── -->
-    <section class="tab-panel active" id="panel-exchange">
+    <section class="tab-panel" id="panel-exchange">
       <!-- Custom Banner Placeholder -->
       <div class="tab-banner">
-        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner"> -->
+        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner" loading="lazy"> -->
       </div>
       <h2 class="panel-header dynamic-header">Exchange Information</h2>
 
@@ -287,7 +297,7 @@
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Student Exchange Flow</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
-            <img src="stock_photo.png" alt="Student Exchange Flow Document" class="landscape-image">
+            <img src="stock_photo.png" alt="Student Exchange Flow Document" class="landscape-image" loading="lazy">
           </div>
         </a>
 
@@ -296,7 +306,8 @@
           style="display: block; text-decoration: none; color: inherit;" id="partner-univ-btn">
           <h3>Partner Universities</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
-            <img src="partner_universities.png" alt="Partner Universities" class="landscape-image top-focus">
+            <img src="partner_universities.png" alt="Partner Universities" class="landscape-image top-focus"
+              loading="lazy">
           </div>
         </a>
       </div>
@@ -344,59 +355,59 @@
           <!-- Row 1 Items -->
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/UQ-Mapping.pdf" target="_blank"
             class="syllabi-circle-card">
-            <div class="circle-logo"><img src="UQ.webp" alt="University of Queensland"></div>
+            <div class="circle-logo"><img src="UQ.webp" alt="University of Queensland" loading="lazy"></div>
             <p>University of Queensland</p>
           </a>
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/Monash-Mapping.pdf" target="_blank"
             class="syllabi-circle-card">
-            <div class="circle-logo"><img src="monash.png" alt="Monash University"></div>
+            <div class="circle-logo"><img src="monash.png" alt="Monash University" loading="lazy"></div>
             <p>Monash University</p>
           </a>
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/QuT-Mapping.pdf" target="_blank"
             class="syllabi-circle-card">
-            <div class="circle-logo"><img src="qut.png" alt="Queensland University of Technology"></div>
+            <div class="circle-logo"><img src="qut.png" alt="Queensland University of Technology" loading="lazy"></div>
             <p>Queensland University of Technology</p>
           </a>
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/Curtin-University-Mapping.pdf"
             target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="Curtin.png" alt="Curtin University"></div>
+            <div class="circle-logo"><img src="Curtin.png" alt="Curtin University" loading="lazy"></div>
             <p>Curtin University</p>
           </a>
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Glasgow-Mapping.pdf"
             target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="glasglow.jpg" alt="University of Glasgow"></div>
+            <div class="circle-logo"><img src="glasglow.jpg" alt="University of Glasgow" loading="lazy"></div>
             <p>University of Glasgow</p>
           </a>
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Birmingham-Mapping.pdf"
             target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="birmingham.webp" alt="University of Birmingham"></div>
+            <div class="circle-logo"><img src="birmingham.webp" alt="University of Birmingham" loading="lazy"></div>
             <p>University of Birmingham</p>
           </a>
 
           <!-- Row 2 Items -->
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Stratchlyde-Mapping.pdf"
             target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="strathclyde.png" alt="University of Strathclyde"></div>
+            <div class="circle-logo"><img src="strathclyde.png" alt="University of Strathclyde" loading="lazy"></div>
             <p>University of Strathclyde</p>
           </a>
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Sydney-Mapping.pdf"
             target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="sydney.svg" alt="University of Sydney"></div>
+            <div class="circle-logo"><img src="sydney.svg" alt="University of Sydney" loading="lazy"></div>
             <p>University of Sydney</p>
           </a>
           <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/UDE-Mapping.pdf" target="_blank"
             class="syllabi-circle-card">
-            <div class="circle-logo"><img src="duisburg.png" alt="University of Duisburg-Essen"></div>
+            <div class="circle-logo"><img src="duisburg.png" alt="University of Duisburg-Essen" loading="lazy"></div>
             <p>University Duisburg-Essen</p>
           </a>
           <div class="syllabi-circle-card unavailable"
             onclick="alert('The syllabus mapping for the University of Manchester is currently unavailable.')">
-            <div class="circle-logo"><img src="manchester.webp" alt="University of Manchester"></div>
+            <div class="circle-logo"><img src="manchester.webp" alt="University of Manchester" loading="lazy"></div>
             <p>Univ of Manchester<br><span class="unavailable-text">(Unavailable)</span></p>
           </div>
           <div class="syllabi-circle-card unavailable"
             onclick="alert('The syllabus mapping for RMIT University is Coming Soon.')">
-            <div class="circle-logo"><img src="RMIT.png" alt="RMIT University"></div>
+            <div class="circle-logo"><img src="RMIT.png" alt="RMIT University" loading="lazy"></div>
             <p>RMIT University<br><span class="unavailable-text">(Coming Soon)</span></p>
           </div>
         </div>
@@ -435,7 +446,7 @@
     <section class="tab-panel" id="panel-contact">
       <!-- Custom Banner Placeholder -->
       <div class="tab-banner">
-        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner"> -->
+        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner" loading="lazy"> -->
       </div>
       <!-- Header -->
       <h2 class="panel-header dynamic-header">Contact Us</h2>
