@@ -1262,10 +1262,7 @@ h6 {
 }
 
 @media (max-width: 768px) {
-  .header__inner {
-    flex-direction: column;
-    text-align: center;
-  }
+  /* Removed old flex-direction: column for header__inner */
 
   .header__tabs {
     justify-content: center;
