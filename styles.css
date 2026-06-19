@@ -144,7 +144,7 @@ h6 {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: rgba(77, 45, 24, 0.95);
+  background-color: var(--bear-brown);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
@@ -445,6 +445,52 @@ h6 {
   font-size: 15px;
   color: var(--text-muted);
   font-weight: 500;
+}
+
+/* ── Appointment Booking Button ───────────────────────────── */
+.appointment-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--cerulean-blue), var(--golden-soft));
+  color: #fff;
+  padding: 18px 36px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 50px;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.5px;
+}
+
+.appointment-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.handclick-icon {
+  position: absolute;
+  bottom: -20px;
+  right: -25px;
+  width: 60px;
+  height: auto;
+  animation: floatHand 2s infinite ease-in-out;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes floatHand {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(-10deg);
+  }
 }
 
 /* ── Exchange Information Layout ───────────────────────────── */
@@ -1478,8 +1524,18 @@ h6 {
 .about-us-video {
   flex: 1.8;
   border-radius: var(--border-radius);
-  overflow: hidden;
+  position: relative;
   box-shadow: var(--shadow-sm);
+}
+
+.crown-icon {
+  position: absolute;
+  top: -60px;
+  left: -41px;
+  width: 100px;
+  transform: rotate(-26deg);
+  z-index: 20;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 .about-us-video iframe {
@@ -1659,6 +1715,32 @@ h6 {
   color: inherit;
 }
 
+/* ── More Information Section ───────────────────────────── */
+.more-information-section {
+  padding: 48px;
+  margin-top: 40px;
+}
+
+.more-info-content {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.more-info-text {
+  flex: 1;
+  text-align: left;
+  min-width: 280px;
+}
+
+.more-info-embed {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 280px;
+}
+
 @media (max-width: 1024px) {
   .qna-row {
     flex-direction: column;
@@ -1725,7 +1807,7 @@ h6 {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
     z-index: 1000;
-    
+
     visibility: hidden;
     opacity: 0;
     transform: translateY(-10px);
@@ -1798,5 +1880,36 @@ h6 {
   .uni-logo-col {
     flex: none;
     margin-bottom: 16px;
+  }
+
+  .more-information-section {
+    padding: 24px;
+  }
+
+  .more-info-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .more-info-text {
+    text-align: center;
+  }
+
+  .crown-icon {
+    width: 55px;
+    top: -32px;
+    left: -20px;
+  }
+
+  .appointment-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .handclick-icon {
+    width: 40px;
+    bottom: -15px;
+    right: -15px;
   }
 }

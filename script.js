@@ -639,27 +639,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Dynamic Sticky Headers Logic ───────────────────────────────
-  let lastScrollY = window.scrollY;
   const dynamicHeaders = document.querySelectorAll('.dynamic-header');
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
 
-    if (currentScrollY > 150) {
-      dynamicHeaders.forEach(header => header.classList.add('scrolled-style'));
-    } else {
-      dynamicHeaders.forEach(header => header.classList.remove('scrolled-style'));
-    }
-
-    if (currentScrollY > lastScrollY && currentScrollY > 150) {
-      // Scrolling down
+    // The banner is roughly 500px tall. We fade out the header completely
+    // once we scroll past 450px so it doesn't block the view when the banner is out of sight.
+    if (currentScrollY > 450) {
       dynamicHeaders.forEach(header => header.classList.add('hide-header'));
     } else {
-      // Scrolling up
       dynamicHeaders.forEach(header => header.classList.remove('hide-header'));
-    }
 
-    lastScrollY = currentScrollY;
+      // Animate to a smaller sticky header as we scroll down the banner
+      if (currentScrollY > 100) {
+        dynamicHeaders.forEach(header => header.classList.add('scrolled-style'));
+      } else {
+        dynamicHeaders.forEach(header => header.classList.remove('scrolled-style'));
+      }
+    }
   });
 
   // ── Mobile Menu Toggle Logic ─────────────────────────────────
