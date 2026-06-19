@@ -1123,6 +1123,14 @@ h6 {
   outline: none;
 }
 
+.partner-search-input-wrapper:hover,
+.country-filter-select:hover {
+  background: #ffffff;
+  border-color: rgba(84, 155, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(84, 155, 255, 0.08);
+  transform: translateY(-1px);
+}
+
 .partner-search-input-wrapper:focus-within,
 .country-filter-select:focus {
   border-color: var(--cerulean-blue);
@@ -1460,7 +1468,7 @@ h6 {
 
   padding: 12px 48px;
   border-radius: 100px;
-  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, font-size 0.3s ease, text-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, background-color 0.3s ease, font-size 0.3s ease, text-shadow 0.3s ease;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -1738,6 +1746,12 @@ h6 {
 .more-information-section {
   padding: 48px;
   margin-top: 40px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.more-information-section:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .more-info-content {
