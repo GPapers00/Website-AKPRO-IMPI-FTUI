@@ -496,21 +496,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const partnerModal = document.getElementById('partner-modal');
   const partnerCloseBtn = document.getElementById('partner-modal-close');
   const partnerSearchInput = document.getElementById('partner-search-input');
+  const partnerCountryFilter = document.getElementById('partner-country-filter');
   const partnerContent = document.getElementById('partner-modal-content');
 
-  const renderPartnerData = (filterText = '') => {
+  // Populate Country Filter Dropdown
+  const populateCountryFilter = () => {
+    if (!partnerCountryFilter) return;
+    partnerUniversitiesData.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.country.toLowerCase();
+      option.textContent = item.country;
+      partnerCountryFilter.appendChild(option);
+    });
+  };
+  populateCountryFilter();
+
+  const renderPartnerData = () => {
+    const filterText = partnerSearchInput.value;
+    const selectedCountry = partnerCountryFilter ? partnerCountryFilter.value : '';
+    
     partnerContent.innerHTML = '';
     const lowerFilter = filterText.toLowerCase();
 
     partnerUniversitiesData.forEach(countryItem => {
-      const countryMatches = countryItem.country.toLowerCase().includes(lowerFilter);
+      // If a country is selected and this isn't it, skip entirely
+      if (selectedCountry && countryItem.country.toLowerCase() !== selectedCountry) {
+        return;
+      }
+
       const matchingUnivs = countryItem.universities.filter(univ =>
         univ.name.toLowerCase().includes(lowerFilter)
       );
 
-      if (!countryMatches && matchingUnivs.length === 0) return;
+      // If searching text and no universities match in this country, skip
+      if (filterText && matchingUnivs.length === 0) return;
 
-      const univsToRender = countryMatches && filterText ? countryItem.universities : (filterText ? matchingUnivs : countryItem.universities);
+      const univsToRender = filterText ? matchingUnivs : countryItem.universities;
 
       const card = document.createElement('div');
       card.className = 'country-card animate-up';
@@ -542,6 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
     partnerBtn.addEventListener('click', (e) => {
       e.preventDefault();
       partnerSearchInput.value = '';
+      if (partnerCountryFilter) partnerCountryFilter.value = '';
       renderPartnerData();
       partnerModal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
@@ -558,9 +580,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === partnerModal) closePartnerModal();
     });
 
-    partnerSearchInput.addEventListener('input', (e) => {
-      renderPartnerData(e.target.value);
+    partnerSearchInput.addEventListener('input', () => {
+      renderPartnerData();
     });
+
+    if (partnerCountryFilter) {
+      partnerCountryFilter.addEventListener('change', () => {
+        renderPartnerData();
+      });
+    }
   }
 
   // ── Asistensi Logic ──────────────────────────────────────────

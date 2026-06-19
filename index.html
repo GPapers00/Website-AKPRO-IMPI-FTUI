@@ -530,11 +530,16 @@
         <button class="modal-close material-symbols-outlined" id="partner-modal-close">close</button>
       </div>
 
-      <!-- Search Bar -->
+      <!-- Search & Filter Bar -->
       <div class="partner-search-container">
-        <span class="material-symbols-outlined partner-search-icon">search</span>
-        <input type="text" id="partner-search-input" class="partner-search-input"
-          placeholder="Search by country or university name...">
+        <div class="partner-search-input-wrapper">
+          <span class="material-symbols-outlined partner-search-icon">search</span>
+          <input type="text" id="partner-search-input" class="partner-search-input"
+            placeholder="Search university name...">
+        </div>
+        <select id="partner-country-filter" class="partner-search-input country-filter-select">
+          <option value="">All Countries</option>
+        </select>
       </div>
 
       <div class="modal-content partner-content" id="partner-modal-content">

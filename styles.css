@@ -1095,17 +1095,36 @@ h6 {
 
 .partner-search-container {
   display: flex;
+  gap: 16px;
+  margin: 0 32px 24px 32px;
+}
+
+.partner-search-input-wrapper,
+.country-filter-select {
+  display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(84, 155, 255, 0.3);
   border-radius: var(--border-radius);
   padding: 12px 20px;
-  margin: 0 32px 24px 32px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
-.partner-search-container:focus-within {
+.partner-search-input-wrapper {
+  flex: 1;
+}
+
+.country-filter-select {
+  flex: 0 0 200px;
+  cursor: pointer;
+  color: var(--bear-brown);
+  font-size: 16px;
+  outline: none;
+}
+
+.partner-search-input-wrapper:focus-within,
+.country-filter-select:focus {
   border-color: var(--cerulean-blue);
   box-shadow: 0 0 0 4px rgba(84, 155, 255, 0.1);
   background: #ffffff;
@@ -1911,5 +1930,15 @@ h6 {
     width: 40px;
     bottom: -15px;
     right: -15px;
+  }
+
+  .partner-search-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .country-filter-select {
+    flex: none;
+    width: 100%;
   }
 }
