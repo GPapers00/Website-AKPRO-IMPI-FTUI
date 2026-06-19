@@ -1916,7 +1916,19 @@ h6 {
   }
 
   .more-information-section {
-    padding: 24px;
+    padding: 20px 12px;
+  }
+
+  /* Force Instagram embed to scale down on small phones */
+  .more-info-embed {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .instagram-media,
+  .instagram-media iframe {
+    min-width: 100% !important;
+    width: 100% !important;
   }
 
   .more-info-content {
