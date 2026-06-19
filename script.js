@@ -1,8 +1,3 @@
-/* ============================================================
-   GOOGLE STITCH - UNIVERSITY STUDENT PORTAL
-   Frontend JavaScript
-   ============================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Tab Navigation Logic ────────────────────────────────────
@@ -72,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "University of Queensland",
       country: "Australia",
-      logo: "UQ.webp",
+      logo: "assets/UQ.webp",
       majors: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Architecture", "Chemical Engineering", "Industrial Engineering", "Bioprocess Engineering"],
       scheme: "2 + 2 (or 3 + 1.5 for Industrial Engineering)",
       intake: "July or February",
@@ -84,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "Monash University",
       country: "Australia",
-      logo: "monash.png",
+      logo: "assets/monash.png",
       majors: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Metallurgical & Material Engineering", "Architecture", "Chemical Engineering", "Bioprocess Engineering", "Environmental Engineering", "Computer Engineering"],
       scheme: "2 + 2 (or 2 + 2.5 for Computer Engineering)",
       intake: "July or February",
@@ -96,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "Queensland University of Technology",
       country: "Australia",
-      logo: "qut.png",
+      logo: "assets/qut.png",
       majors: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Architecture", "Interior Architecture"],
       scheme: "2 + 2",
       intake: "July or February",
@@ -108,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "Curtin University",
       country: "Australia",
-      logo: "Curtin.png",
+      logo: "assets/Curtin.png",
       majors: ["Metallurgical & Material Engineering", "Architecture"],
       scheme: "2 + 2",
       intake: "July or February",
@@ -120,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "University of Sydney",
       country: "Australia",
-      logo: "sydney.svg",
+      logo: "assets/sydney.svg",
       majors: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Chemical Engineering"],
       scheme: "2 + 2",
       intake: "July or February",
@@ -132,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "University of Duisburg-Essen",
       country: "Germany",
-      logo: "duisburg.png",
+      logo: "assets/duisburg.png",
       majors: ["Electrical Engineering", "Metallurgical & Material Engineering"],
       scheme: "3 + 1",
       intake: "October",
@@ -144,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "University of Strathclyde",
       country: "United Kingdom",
-      logo: "strathclyde.png",
+      logo: "assets/strathclyde.png",
       majors: ["Mechanical Engineering", "Naval Architecture & Marine Engineering"],
       scheme: "2 + 2",
       intake: "September",
@@ -156,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "University of Birmingham",
       country: "United Kingdom",
-      logo: "birmingham.webp",
+      logo: "assets/birmingham.webp",
       majors: ["Chemical Engineering"],
       scheme: "2 + 2",
       intake: "September",
@@ -168,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "University of Glasgow",
       country: "United Kingdom",
-      logo: "glasglow.jpg",
+      logo: "assets/glasglow.jpg",
       majors: ["Civil Engineering", "Electrical Engineering"],
       scheme: "2 + 2",
       intake: "September",
@@ -180,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "University of Manchester",
       country: "United Kingdom",
-      logo: "manchester.webp",
+      logo: "assets/manchester.webp",
       majors: ["Chemical Engineering"],
       scheme: "2 + 2",
       intake: "September",
@@ -192,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "RMIT University",
       country: "Australia",
-      logo: "RMIT.png",
+      logo: "assets/RMIT.png",
       majors: ["Interior Architecture"],
       scheme: "Coming Soon",
       intake: "Coming Soon",
@@ -230,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlContent += `
               <div class="uni-card animate-up">
                 <div class="uni-logo-col">
-                  <img src="${uni.logo}" alt="${uni.name} Logo" class="uni-logo" loading="lazy" onerror="this.src='logo.png'">
+                  <img src="${uni.logo}" alt="${uni.name} Logo" class="uni-logo" loading="lazy" onerror="this.src='assets/logo.png'">
                   <span class="uni-country">${uni.country}</span>
                 </div>
                 <div class="uni-details-col">
@@ -514,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderPartnerData = () => {
     const filterText = partnerSearchInput.value;
     const selectedCountry = partnerCountryFilter ? partnerCountryFilter.value : '';
-    
+
     partnerContent.innerHTML = '';
     const lowerFilter = filterText.toLowerCase();
 
