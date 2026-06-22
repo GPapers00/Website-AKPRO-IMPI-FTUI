@@ -1,0 +1,17 @@
+# Node dependencies
+node_modules/
+npm-debug.log
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# MacOS system files
+.DS_Store
+
+# Logs
+logs
+*.log
