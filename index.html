@@ -232,36 +232,8 @@
 
 
       <!-- 3 Box Layout -->
-      <div class="diktat-container">
-        <div class="diktat-top-row">
-          <a href="https://drive.google.com/drive/folders/11OVi7NYhhcWEkW-nihSzo7bJBneWc0HK" target="_blank"
-            class="main-info-card glass-card animate-up delay-1"
-            style="display: block; text-decoration: none; color: inherit; width: 100%;">
-            <h3>UAS Genap 2026</h3>
-            <div class="image-link-wrapper" style="margin-bottom: 0;">
-              <img src="assets/uas_genap_2026.jpg" alt="UAS Genap 2026" class="landscape-image top-focus" loading="lazy">
-            </div>
-          </a>
-          <a href="https://drive.google.com/drive/u/3/folders/11fYARgQe9KUlQvWI1TUL2Lbq5ZJyFlW_" target="_blank"
-            class="main-info-card glass-card animate-up delay-2"
-            style="display: block; text-decoration: none; color: inherit; width: 100%;">
-            <h3>UTS Genap 2026</h3>
-            <div class="image-link-wrapper" style="margin-bottom: 0;">
-              <img src="assets/uts_genap_2026.jpg" alt="UTS Genap 2026" class="landscape-image top-focus" loading="lazy">
-            </div>
-          </a>
-        </div>
-        <div class="diktat-bottom-row">
-          <a href="https://drive.google.com/drive/u/3/folders/1EAgDu_6mfdcVfR3kxHYLyaVWZDlma0sU" target="_blank"
-            class="main-info-card glass-card animate-up delay-3"
-            style="display: block; text-decoration: none; color: inherit; width: 100%;">
-            <h3>Archive Diktat Akpro IMPI</h3>
-            <div class="image-link-wrapper" style="margin-bottom: 0;">
-              <img src="assets/archive_diktat.jpg" alt="Archive Diktat Akpro IMPI" class="landscape-image top-focus"
-                loading="lazy">
-            </div>
-          </a>
-        </div>
+      <div class="diktat-container" id="diktat-content-area">
+        <!-- Dynamically populated from Supabase -->
       </div>
     </section>
 
@@ -276,7 +248,7 @@
       <div class="exchange-top-grid">
 
         <!-- Calendar Graphic 1 -->
-        <a href="https://drive.google.com/file/d/12OSGm8zHrxXGLE4gv6QZ9YCVCuOminhw/view?usp=drive_link" target="_blank"
+        <a href="#" id="calendar-modal-btn"
           class="main-info-card glass-card animate-up delay-1"
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Odd Semester 2026/2027</h3>
@@ -287,8 +259,8 @@
         </a>
 
         <!-- Calendar Graphic 2 -->
-        <a href="https://drive.google.com/drive/folders/1O-GzP1AgLPYhLq1wxrbfHSx90oXyFkWH?usp=drive_link"
-          target="_blank" class="main-info-card glass-card animate-up delay-2"
+        <a href="#" id="past-calendar-modal-btn"
+          class="main-info-card glass-card animate-up delay-2"
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Past Academic Calendar</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
@@ -380,65 +352,8 @@
           <h2>Syllabi of <br>Partner <br>Universities</h2>
           <div class="header-line"></div>
         </div>
-        <div class="syllabi-right-grid">
-          <!-- Row 1 Items -->
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/UQ-Mapping.pdf" target="_blank"
-            class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/UQ.webp" alt="University of Queensland" loading="lazy"></div>
-            <p>University of Queensland</p>
-          </a>
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/Monash-Mapping.pdf" target="_blank"
-            class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/monash.png" alt="Monash University" loading="lazy"></div>
-            <p>Monash University</p>
-          </a>
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/QuT-Mapping.pdf" target="_blank"
-            class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/qut.png" alt="Queensland University of Technology" loading="lazy"></div>
-            <p>Queensland University of Technology</p>
-          </a>
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/Curtin-University-Mapping.pdf"
-            target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/Curtin.png" alt="Curtin University" loading="lazy"></div>
-            <p>Curtin University</p>
-          </a>
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Glasgow-Mapping.pdf"
-            target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/glasglow.jpg" alt="University of Glasgow" loading="lazy"></div>
-            <p>University of Glasgow</p>
-          </a>
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Birmingham-Mapping.pdf"
-            target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/birmingham.webp" alt="University of Birmingham" loading="lazy"></div>
-            <p>University of Birmingham</p>
-          </a>
-
-          <!-- Row 2 Items -->
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Stratchlyde-Mapping.pdf"
-            target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/strathclyde.png" alt="University of Strathclyde" loading="lazy"></div>
-            <p>University of Strathclyde</p>
-          </a>
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/University-of-Sydney-Mapping.pdf"
-            target="_blank" class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/sydney.svg" alt="University of Sydney" loading="lazy"></div>
-            <p>University of Sydney</p>
-          </a>
-          <a href="https://international.eng.ui.ac.id/wp-content/uploads/194/2026/01/UDE-Mapping.pdf" target="_blank"
-            class="syllabi-circle-card">
-            <div class="circle-logo"><img src="assets/duisburg.png" alt="University of Duisburg-Essen" loading="lazy"></div>
-            <p>University Duisburg-Essen</p>
-          </a>
-          <div class="syllabi-circle-card unavailable"
-            onclick="alert('The syllabus mapping for the University of Manchester is currently unavailable.')">
-            <div class="circle-logo"><img src="assets/manchester.webp" alt="University of Manchester" loading="lazy"></div>
-            <p>Univ of Manchester<br><span class="unavailable-text">(Unavailable)</span></p>
-          </div>
-          <div class="syllabi-circle-card unavailable"
-            onclick="alert('The syllabus mapping for RMIT University is Coming Soon.')">
-            <div class="circle-logo"><img src="assets/RMIT.png" alt="RMIT University" loading="lazy"></div>
-            <p>RMIT University<br><span class="unavailable-text">(Coming Soon)</span></p>
-          </div>
+        <div class="syllabi-right-grid" id="syllabi-content-area">
+          <!-- Dynamically populated from Supabase -->
         </div>
       </div>
 
@@ -566,6 +481,36 @@
     </div>
   </div>
 
+  <!-- Calendar Modal -->
+  <div class="modal-overlay hidden" id="calendar-modal">
+    <div class="modal-container glass-card" style="max-width: 800px;">
+      <div class="modal-header">
+        <h2 id="calendar-modal-title">Odd Semester 2026/2027</h2>
+        <button class="modal-close material-symbols-outlined" id="calendar-modal-close">close</button>
+      </div>
+      <div class="modal-content" id="calendar-modal-content"
+        style="padding: 32px; display: flex; flex-direction: column; gap: 16px; max-height: 70vh; overflow-y: auto;">
+        <!-- Dynamically populated from Supabase -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Past Calendar Modal -->
+  <div class="modal-overlay hidden" id="past-calendar-modal">
+    <div class="modal-container glass-card" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2 id="past-calendar-modal-title">Past Academic Calendar</h2>
+        <button class="modal-close material-symbols-outlined" id="past-calendar-modal-close">close</button>
+      </div>
+      <div class="modal-content" id="past-calendar-modal-content"
+        style="padding: 32px; display: flex; flex-direction: column; gap: 16px;">
+        <!-- Dynamically populated from Supabase -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Supabase Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
 
