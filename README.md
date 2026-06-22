@@ -20,34 +20,53 @@ This portal is designed to support International Program students in navigating 
 
 ## Technology Stack
 
+### Frontend
 - **HTML5**: Semantic structure and accessible layout.
 - **CSS3 (Vanilla)**: Custom styling utilizing CSS variables, Flexbox/Grid, media queries for responsiveness, and smooth `cubic-bezier` transitions.
 - **JavaScript (Vanilla)**: Handles tab navigation, dynamic modal rendering, search/filter algorithms, and scroll-event listeners.
+
+### Backend
+- **Node.js & Express**: Custom REST API server acting as a secure middleman.
+- **Supabase**: PostgreSQL database for managing Universities, Partners, Diktat, Asistensi, and Academic Calendars.
 
 ## Project Structure
 
 ```text
 ├── index.html       # Main HTML document and layout structure
 ├── styles.css       # Core stylesheet with variables, animations, and responsive rules
-├── script.js        # Logic for tabs, modals, and dynamic content injection
+├── script.js        # Frontend logic for fetching data, modals, and UI interaction
+├── server.js        # Node.js/Express backend API server
+├── package.json     # Node.js dependencies
+├── .env             # (Not in repo) Supabase URL and API Keys
 ├── assets/          # Directory containing all images, logos, and icons
 │   ├── logo.png     
 │   ├── crown.png
-│   ├── UQ.webp
 │   └── ...          
 └── README.md        # Project documentation
 ```
 
 ## Getting Started
 
-Since this is a static frontend project, no complex build tools or servers are required!
+This project utilizes a Client-Server architecture. You will need to run the Node.js server for the website to fetch data from Supabase successfully.
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/impi-academic-center.git
+   git clone https://github.com/GPapers00/Website-AKPRO-IMPI-FTUI.git
    ```
-2. Navigate to the project folder.
-3. Simply open `index.html` in your favorite web browser (Chrome, Safari, Edge, Firefox).
+2. Navigate to the project folder and install the required dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file in the root directory and add your Supabase credentials:
+   ```env
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_KEY=your_supabase_anon_key
+   ```
+4. Start the backend server:
+   ```bash
+   node server.js
+   ```
+5. Open `index.html` in your favorite web browser (Chrome, Safari, Edge, Firefox) or run it through a local extension like Live Server. The website will dynamically fetch data from your local server at `http://localhost:3000`.
 
 ## About AKPRO IMPI FTUI
 
