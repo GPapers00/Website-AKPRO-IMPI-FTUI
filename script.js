@@ -65,30 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── University Modal Logic ──────────────────────────────────
   let universitiesData = [];
 
-  // Initialize Supabase
-  const supabaseUrl = 'https://yuowevnqampepskwlgbd.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1b3dldm5xYW1wZXBza3dsZ2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMzkyNTAsImV4cCI6MjA5NzcxNTI1MH0.MX2tsfgkPEazK-pdPeXfXi8vyfdmSZ5cIdRsmTlDKQs';
-  const supabase = window.supabase ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
+  const API_BASE_URL = 'http://localhost:3000/api';
 
   async function loadUniversities() {
-    if (!supabase) {
-      console.error("Supabase library not loaded.");
-      return;
-    }
-
     try {
-      // Fetch from the 'universities' table we created in SQL
-      const { data, error } = await supabase.from('universities').select('*');
-      if (error) throw error;
+      const response = await fetch(`${API_BASE_URL}/universities`);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
 
       if (data && data.length > 0) {
         universitiesData = data;
-        console.log("Successfully loaded universities from Supabase:", data);
+        console.log("Successfully loaded universities from Backend API:", data);
       } else {
-        console.warn("Supabase returned empty data for universities.");
+        console.warn("Backend returned empty data for universities.");
       }
     } catch (error) {
-      console.error("Error fetching universities from Supabase:", error);
+      console.error("Error fetching universities from Backend API:", error);
     }
   }
 
@@ -185,10 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let partnerUniversitiesData = [];
 
   async function loadGlobalPartners() {
-    if (!supabase) return;
     try {
-      const { data, error } = await supabase.from('global_partners').select('*').order('country', { ascending: true });
-      if (error) throw error;
+      const response = await fetch(`${API_BASE_URL}/partners`);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
       if (data && data.length > 0) {
         partnerUniversitiesData = data;
         if (typeof populateCountryFilter === 'function') {
@@ -312,10 +304,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let asistensiData = { video: [], notes: [] };
 
   async function loadAsistensi() {
-    if (!supabase) return;
     try {
-      const { data, error } = await supabase.from('asistensi').select('*');
-      if (error) throw error;
+      const response = await fetch(`${API_BASE_URL}/asistensi`);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
       if (data && data.length > 0) {
         asistensiData.video = data.filter(item => item.type === 'video');
         asistensiData.notes = data.filter(item => item.type === 'notes');
@@ -476,10 +468,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Diktat Logic ──────────────────────────────────────────────
   const diktatContainer = document.getElementById('diktat-content-area');
   async function loadDiktat() {
-    if (!supabase || !diktatContainer) return;
+    if (!diktatContainer) return;
     try {
-      const { data, error } = await supabase.from('diktat').select('*').order('id', { ascending: true });
-      if (error) throw error;
+      const response = await fetch(`${API_BASE_URL}/diktat`);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
       
       if (data && data.length > 0) {
         const topItems = data.filter(d => d.row_group === 'top');
@@ -524,10 +517,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Syllabus Mapping Logic ────────────────────────────────────
   const syllabiContainer = document.getElementById('syllabi-content-area');
   async function loadSyllabusMapping() {
-    if (!supabase || !syllabiContainer) return;
+    if (!syllabiContainer) return;
     try {
-      const { data, error } = await supabase.from('syllabus_mapping').select('*').order('id', { ascending: true });
-      if (error) throw error;
+      const response = await fetch(`${API_BASE_URL}/syllabi`);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
       
       if (data && data.length > 0) {
         let html = '';
@@ -567,10 +561,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const pastCalendarModalContent = document.getElementById('past-calendar-modal-content');
 
   async function loadAcademicCalendar() {
-    if (!supabase || (!calendarModalContent && !pastCalendarModalContent)) return;
+    if (!calendarModalContent && !pastCalendarModalContent) return;
     try {
-      const { data, error } = await supabase.from('academic_calendar').select('*').order('id', { ascending: true });
-      if (error) throw error;
+      const response = await fetch(`${API_BASE_URL}/calendar`);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
 
       if (data && data.length > 0) {
         let currentHtml = '';
