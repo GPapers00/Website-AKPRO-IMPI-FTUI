@@ -31,9 +31,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Update browser history if requested
     if (updateHistory) {
-      if (window.location.hash !== `#${targetTab}`) {
-        window.history.pushState(null, null, `#${targetTab}`);
+      const isLocal = window.location.protocol === 'file:';
+      if (isLocal) {
+        if (window.location.hash !== `#${targetTab}`) {
+          window.history.pushState(null, null, `#${targetTab}`);
+        }
+      } else {
+        if (window.location.pathname !== `/${targetTab}`) {
+          window.history.pushState(null, null, `/${targetTab}`);
+        }
       }
+    }
+  }
+
+  // Helper to get current tab from URL (works for clean paths or hashes)
+  function getCurrentTabFromUrl() {
+    const isLocal = window.location.protocol === 'file:';
+    if (isLocal) {
+      return window.location.hash.replace('#', '');
+    } else {
+      let path = window.location.pathname.replace(/^\/|\/$/g, '');
+      if (path === 'index.html' || !path) return '';
+      return path;
     }
   }
 
@@ -50,21 +69,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Automatically close any open modals when hitting the back button
     document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'));
 
-    // Determine which tab to show based on the URL hash
-    let hash = window.location.hash.replace('#', '');
-    if (!hash) {
-      hash = 'home'; // Default to home
+    // Determine which tab to show based on the URL
+    let tab = getCurrentTabFromUrl();
+    if (!tab) {
+      tab = 'home'; // Default to home
     }
-    switchTab(hash, false); // false = don't push another state
+    switchTab(tab, false); // false = don't push another state
   });
 
   // Check URL on initial page load (so sharing links works!)
-  let initialHash = window.location.hash.replace('#', '');
-  if (initialHash) {
-    switchTab(initialHash, false);
+  let initialTab = getCurrentTabFromUrl();
+  if (initialTab) {
+    switchTab(initialTab, false);
   } else {
     // Explicitly set the initial state to home without adding to history
-    window.history.replaceState(null, null, '#home');
+    const isLocal = window.location.protocol === 'file:';
+    window.history.replaceState(null, null, isLocal ? '#home' : '/home');
   }
 
   // ── Logo Navigation Logic ───────────────────────────────────
