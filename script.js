@@ -1,48 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Tab Navigation Logic ────────────────────────────────────
+  // ── Tab Navigation & Hash Routing Logic ───────────────────────
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
 
+  function switchTab(targetTab, updateHistory = true) {
+    // 1. Remove active class from all buttons and panels
+    tabBtns.forEach(b => b.classList.remove('active'));
+    tabPanels.forEach(p => p.classList.remove('active'));
+
+    // 2. Add active class to the target button
+    const btn = document.querySelector(`.tab-btn[data-tab="${targetTab}"]`);
+    if (btn) btn.classList.add('active');
+
+    // 3. Find the corresponding panel and activate it
+    const targetPanel = document.getElementById(`panel-${targetTab}`);
+    if (targetPanel) {
+      targetPanel.classList.add('active');
+    }
+
+    // 4. Manage YouTube Video Playback
+    const youtubeIframe = document.querySelector('.about-us-video iframe');
+    if (youtubeIframe) {
+      if (targetTab === 'home') {
+        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      } else {
+        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      }
+    }
+
+    // 5. Update browser history if requested
+    if (updateHistory) {
+      if (window.location.hash !== `#${targetTab}`) {
+        window.history.pushState(null, null, `#${targetTab}`);
+      }
+    }
+  }
+
+  // Click listeners for tab buttons
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // 1. Get the target tab identifier
       const targetTab = btn.getAttribute('data-tab');
-
-      // 2. Remove active class from all buttons and panels
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabPanels.forEach(p => p.classList.remove('active'));
-
-      // 3. Add active class to the clicked button
-      btn.classList.add('active');
-
-      // 4. Find the corresponding panel and activate it
-      const targetPanel = document.getElementById(`panel-${targetTab}`);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
-      }
-
-      // 5. Manage YouTube Video Playback
-      const youtubeIframe = document.querySelector('.about-us-video iframe');
-      if (youtubeIframe) {
-        if (targetTab === 'home') {
-          // Play video when returning to home tab
-          youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        } else {
-          // Pause video when leaving home tab
-          youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        }
-      }
+      switchTab(targetTab, true);
     });
   });
 
+  // Handle Device Back/Forward buttons
+  window.addEventListener('popstate', () => {
+    // Automatically close any open modals when hitting the back button
+    document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'));
+
+    // Determine which tab to show based on the URL hash
+    let hash = window.location.hash.replace('#', '');
+    if (!hash) {
+      hash = 'home'; // Default to home
+    }
+    switchTab(hash, false); // false = don't push another state
+  });
+
+  // Check URL on initial page load (so sharing links works!)
+  let initialHash = window.location.hash.replace('#', '');
+  if (initialHash) {
+    switchTab(initialHash, false);
+  } else {
+    // Explicitly set the initial state to home without adding to history
+    window.history.replaceState(null, null, '#home');
+  }
+
   // ── Logo Navigation Logic ───────────────────────────────────
   const logoBtn = document.getElementById('logo-btn');
-  const homeTabBtn = document.querySelector('.tab-btn[data-tab="home"]');
-
-  if (logoBtn && homeTabBtn) {
-    logoBtn.addEventListener('click', () => {
-      homeTabBtn.click();
+  if (logoBtn) {
+    logoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchTab('home', true);
     });
   }
 
