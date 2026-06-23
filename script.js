@@ -653,25 +653,29 @@ document.addEventListener('DOMContentLoaded', () => {
       
       let html = `
         <div class="opening-header">
-          <h4 class="opening-title">\${item.university}</h4>
-          <span class="opening-country">\${item.country}</span>
+          <h4 class="opening-title">${item.university}</h4>
+          <span class="opening-country">${item.country}</span>
         </div>
         <div class="opening-details">
           <div class="opening-detail-row">
             <span class="material-symbols-outlined">badge</span>
-            <strong>Program:</strong> <span>\${item.program_name}</span>
+            <strong>Program:</strong> <span>${item.program_name}</span>
+          </div>
+          <div class="opening-detail-row">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Status:</strong> <span style="font-weight:bold; color: ${item.status === 'OPEN' ? 'var(--cerulean-blue)' : '#e67e22'};">${item.status}</span>
           </div>
           <div class="opening-detail-row">
             <span class="material-symbols-outlined">event</span>
-            <strong>Deadline:</strong> <span style="color:#cf2e2e; font-weight:bold;">\${item.deadline}</span>
+            <strong>Deadline:</strong> <span style="color:#cf2e2e; font-weight:bold;">${item.deadline}</span>
           </div>
           <div class="opening-detail-row">
             <span class="material-symbols-outlined">schedule</span>
-            <strong>Period:</strong> <span>\${item.period}</span>
+            <strong>Period:</strong> <span>${item.period}</span>
           </div>
           <div class="opening-detail-row">
             <span class="material-symbols-outlined">school</span>
-            <strong>Level:</strong> <span>\${item.level}</span>
+            <strong>Level:</strong> <span>${item.level}</span>
           </div>
       `;
       
@@ -679,13 +683,15 @@ document.addEventListener('DOMContentLoaded', () => {
         html += `
           <div class="opening-detail-row">
             <span class="material-symbols-outlined">info</span>
-            <strong>Notes:</strong> <span>\${item.notes}</span>
+            <strong>Notes:</strong> <span>${item.notes}</span>
           </div>
         `;
       }
 
-      if (item.link && item.link.trim() !== '') {
-        html += `<a href="\${item.link}" target="_blank" class="opening-link">View Details</a>`;
+      if (item.link && item.link.trim() !== '' && !item.link.includes('coming-soon')) {
+        html += `<a href="${item.link}" target="_blank" class="opening-link">View Details</a>`;
+      } else {
+        html += `<span class="opening-link" style="background:var(--text-muted); cursor:not-allowed;">Link Coming Soon</span>`;
       }
       
       html += `</div>`;

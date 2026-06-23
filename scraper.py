@@ -4,6 +4,7 @@ import json
 import re
 import ssl
 import os
+from datetime import datetime
 
 def load_env():
     # Simple .env parser to avoid external dependencies like python-dotenv
@@ -72,12 +73,29 @@ def scrape_opportunities():
                         except ValueError:
                             continue
                             
+                        deadline_str = clean_cols[4]
+                        
+                        # Check if deadline has already passed
+                        expired = False
+                        try:
+                            # Look for a date like "12 June 2026"
+                            match = re.search(r'(\d{1,2}\s+[a-zA-Z]+\s+\d{4})', deadline_str)
+                            if match:
+                                dt = datetime.strptime(match.group(1), "%d %B %Y")
+                                if dt < datetime.now():
+                                    expired = True
+                        except Exception:
+                            pass
+                            
+                        if expired:
+                            continue
+                            
                         opportunities.append({
                             "id": item_id,
                             "program_name": clean_cols[1],
                             "country": clean_cols[2],
                             "university": clean_cols[3],
-                            "deadline": clean_cols[4],
+                            "deadline": deadline_str,
                             "period": clean_cols[5],
                             "level": clean_cols[6],
                             "link": link,
