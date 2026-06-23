@@ -606,4 +606,119 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   loadAcademicCalendar();
 
+  // ── Open Opportunities Logic ──────────────────────────────────
+  let openingsData = [];
+
+  async function loadOpenings() {
+    if (!supabase) return;
+    try {
+      const { data, error } = await supabase.from('open_opportunities').select('*').order('id', { ascending: true });
+      if (error) throw error;
+      if (data && data.length > 0) {
+        openingsData = data;
+      }
+    } catch (error) {
+      console.error("Error fetching open opportunities:", error);
+    }
+  }
+
+  loadOpenings();
+
+  const openingsBtn = document.getElementById('openings-modal-btn');
+  const openingsModal = document.getElementById('openings-modal');
+  const openingsCloseBtn = document.getElementById('openings-modal-close');
+  const openingsSearchInput = document.getElementById('openings-search-input');
+  const openingsContent = document.getElementById('openings-modal-content');
+
+  const renderOpeningsData = () => {
+    if (!openingsContent) return;
+    const filterText = openingsSearchInput.value.toLowerCase();
+    
+    openingsContent.innerHTML = '';
+    
+    const filteredData = openingsData.filter(item => 
+      item.university.toLowerCase().includes(filterText) || 
+      item.country.toLowerCase().includes(filterText) ||
+      item.program_name.toLowerCase().includes(filterText)
+    );
+
+    if (filteredData.length === 0) {
+      openingsContent.innerHTML = '<div style="text-align:center; padding: 40px 20px;"><h4 style="font-size: 20px; color: var(--bear-brown);">No opportunities found.</h4></div>';
+      return;
+    }
+
+    filteredData.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'opening-card animate-up';
+      
+      let html = `
+        <div class="opening-header">
+          <h4 class="opening-title">\${item.university}</h4>
+          <span class="opening-country">\${item.country}</span>
+        </div>
+        <div class="opening-details">
+          <div class="opening-detail-row">
+            <span class="material-symbols-outlined">badge</span>
+            <strong>Program:</strong> <span>\${item.program_name}</span>
+          </div>
+          <div class="opening-detail-row">
+            <span class="material-symbols-outlined">event</span>
+            <strong>Deadline:</strong> <span style="color:#cf2e2e; font-weight:bold;">\${item.deadline}</span>
+          </div>
+          <div class="opening-detail-row">
+            <span class="material-symbols-outlined">schedule</span>
+            <strong>Period:</strong> <span>\${item.period}</span>
+          </div>
+          <div class="opening-detail-row">
+            <span class="material-symbols-outlined">school</span>
+            <strong>Level:</strong> <span>\${item.level}</span>
+          </div>
+      `;
+      
+      if (item.notes && item.notes.trim() !== '') {
+        html += `
+          <div class="opening-detail-row">
+            <span class="material-symbols-outlined">info</span>
+            <strong>Notes:</strong> <span>\${item.notes}</span>
+          </div>
+        `;
+      }
+
+      if (item.link && item.link.trim() !== '') {
+        html += `<a href="\${item.link}" target="_blank" class="opening-link">View Details</a>`;
+      }
+      
+      html += `</div>`;
+      card.innerHTML = html;
+      openingsContent.appendChild(card);
+    });
+  };
+
+  if (openingsBtn && openingsModal && openingsCloseBtn) {
+    openingsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if(openingsSearchInput) openingsSearchInput.value = '';
+      renderOpeningsData();
+      openingsModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeOpeningsModal = () => {
+      openingsModal.classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+
+    openingsCloseBtn.addEventListener('click', closeOpeningsModal);
+
+    openingsModal.addEventListener('click', (e) => {
+      if (e.target === openingsModal) closeOpeningsModal();
+    });
+
+    if (openingsSearchInput) {
+      openingsSearchInput.addEventListener('input', () => {
+        renderOpeningsData();
+      });
+    }
+  }
+
 });

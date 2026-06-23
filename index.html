@@ -162,26 +162,40 @@
         </div>
 
         <!-- Section 3: More Information -->
-        <div class="more-information-section glass-card animate-up delay-1">
-          <div class="more-info-content">
-
-            <div class="more-info-text">
-              <h2 style="font-size: 36px; font-weight: 800; color: var(--bear-brown); margin-bottom: 24px;">More
-                Information</h2>
-              <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-dark);">Visit our Instagram page for more
-                Student Exchange information or post-campus opportunities.</p>
+        <div class="more-info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; margin-top: 40px;">
+          
+          <!-- Box 1: PIPTEK Info -->
+          <div class="more-information-section glass-card animate-up delay-1" style="padding: 40px; display: flex; flex-direction: column;">
+            <div class="more-info-text" style="margin-bottom: 32px; text-align: center;">
+              <h2 style="font-size: 28px; font-weight: 800; color: var(--bear-brown); margin-bottom: 16px;">More Information</h2>
+              <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-muted);">Visit PIPTEK Instagram page for more Student Exchange information or post-campus opportunities.</p>
             </div>
 
-            <div class="more-info-embed">
+            <div class="more-info-embed" style="display: flex; justify-content: center; margin-top: auto;">
               <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DYmLOGoE0Tg/"
                 data-instgrm-version="14"
                 style=" background:#FFF; border:0; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1); margin: 1px; max-width:326px; padding:0; width:100%;">
               </blockquote>
-              <script async src="https://www.instagram.com/embed.js"></script>
+            </div>
+          </div>
+
+          <!-- Box 2: IMPI Official Account -->
+          <div class="more-information-section glass-card animate-up delay-2" style="padding: 40px; display: flex; flex-direction: column;">
+            <div class="more-info-text" style="margin-bottom: 32px; text-align: center;">
+              <h2 style="font-size: 28px; font-weight: 800; color: var(--bear-brown); margin-bottom: 16px;">IMPI Official Instagram Account</h2>
+              <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-muted);">Visit IMPI official account for information on scholarships, news, articles, and much more!</p>
             </div>
 
+            <div class="more-info-embed" style="display: flex; justify-content: center; margin-top: auto;">
+              <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWOcydEE-qP/?img_index=2"
+                data-instgrm-version="14"
+                style=" background:#FFF; border:0; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1); margin: 1px; max-width:326px; padding:0; width:100%;">
+              </blockquote>
+            </div>
           </div>
+
         </div>
+        <script async src="https://www.instagram.com/embed.js"></script>
       </div>
     </section>
 
@@ -248,8 +262,7 @@
       <div class="exchange-top-grid">
 
         <!-- Calendar Graphic 1 -->
-        <a href="#" id="calendar-modal-btn"
-          class="main-info-card glass-card animate-up delay-1"
+        <a href="#" id="calendar-modal-btn" class="main-info-card glass-card animate-up delay-1"
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Odd Semester 2026/2027</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
@@ -259,8 +272,7 @@
         </a>
 
         <!-- Calendar Graphic 2 -->
-        <a href="#" id="past-calendar-modal-btn"
-          class="main-info-card glass-card animate-up delay-2"
+        <a href="#" id="past-calendar-modal-btn" class="main-info-card glass-card animate-up delay-2"
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Past Academic Calendar</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
@@ -290,7 +302,8 @@
           style="display: block; text-decoration: none; color: inherit;">
           <h3>Student Exchange Flow</h3>
           <div class="image-link-wrapper" style="margin-bottom: 0;">
-            <img src="assets/stock_photo.png" alt="Student Exchange Flow Document" class="landscape-image" loading="lazy">
+            <img src="assets/stock_photo.png" alt="Student Exchange Flow Document" class="landscape-image"
+              loading="lazy">
           </div>
         </a>
 
@@ -301,6 +314,15 @@
           <div class="image-link-wrapper" style="margin-bottom: 0;">
             <img src="assets/partner_universities.png" alt="Partner Universities" class="landscape-image top-focus"
               loading="lazy">
+          </div>
+        </a>
+
+        <!-- Main Info Area 3 (Student Exchange Programs) -->
+        <a href="#" class="main-info-card glass-card animate-up delay-3"
+          style="display: block; text-decoration: none; color: inherit;" id="openings-modal-btn">
+          <h3>Student Exchange Programs</h3>
+          <div class="image-link-wrapper" style="margin-bottom: 0;">
+            <img src="assets/calendar_image.jpg" alt="Student Exchange Programs" class="landscape-image top-focus" loading="lazy">
           </div>
         </a>
       </div>
@@ -481,6 +503,29 @@
     </div>
   </div>
 
+  <!-- Open Opportunities Modal -->
+  <div class="modal-overlay hidden" id="openings-modal">
+    <div class="modal-container glass-card partner-modal-container">
+      <div class="modal-header">
+        <h2 id="openings-modal-title">Student Exchange Programs</h2>
+        <button class="modal-close material-symbols-outlined" id="openings-modal-close">close</button>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="partner-search-container">
+        <div class="partner-search-input-wrapper">
+          <span class="material-symbols-outlined partner-search-icon">search</span>
+          <input type="text" id="openings-search-input" class="partner-search-input"
+            placeholder="Search country or university...">
+        </div>
+      </div>
+
+      <div class="modal-content partner-content" id="openings-modal-content" style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Openings will be injected here via JS -->
+      </div>
+    </div>
+  </div>
+
   <!-- Calendar Modal -->
   <div class="modal-overlay hidden" id="calendar-modal">
     <div class="modal-container glass-card" style="max-width: 800px;">
@@ -505,9 +550,9 @@
       <div class="modal-content" id="past-calendar-modal-content"
         style="padding: 32px; display: flex; flex-direction: column; gap: 16px;">
         <!-- Dynamically populated from Supabase -->
-  <!-- Add Supabase Library -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.js"></script>
+        <!-- Add Supabase Library -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>
