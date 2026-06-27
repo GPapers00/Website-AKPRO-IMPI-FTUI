@@ -105,7 +105,11 @@ export function initDiktat() {
         const bottomItems = data.filter(d => d.row_group === 'bottom');
         let html = '<div class="diktat-top-row">';
         topItems.forEach((item, index) => {
-          html += `<a href="#" data-title="${item.title}" class="main-info-card glass-card animate-up delay-${index + 1} diktat-top-item" style="display: block; text-decoration: none; color: inherit; width: 100%;"><h3>${item.title}</h3><div class="image-link-wrapper" style="margin-bottom: 0;"><img src="${item.image_url}" alt="${item.title}" class="landscape-image top-focus" loading="lazy"></div></a>`;
+          let imgUrl = item.image_url;
+          if (index === 0) imgUrl = 'assets/UAS-genap-2026.jpg';
+          if (index === 1) imgUrl = 'assets/UTS-genap-2026.jpg';
+          
+          html += `<a href="#" data-title="${item.title}" class="main-info-card glass-card animate-up delay-${index + 1} diktat-top-item" style="display: block; text-decoration: none; color: inherit; width: 100%;"><h3>${item.title}</h3><div class="image-link-wrapper" style="margin-bottom: 0;"><img src="${imgUrl}" alt="${item.title}" class="landscape-image top-focus" loading="lazy"></div></a>`;
         });
         html += '</div><div class="diktat-bottom-row">';
         bottomItems.forEach((item, index) => {
