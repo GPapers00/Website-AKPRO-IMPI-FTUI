@@ -66,7 +66,7 @@ def scrape_opportunities():
                     if not is_excluded:
                         # Find link if available
                         link_match = re.search(r'href=[\'"]?([^\'" >]+)', cols[7])
-                        link = link_match.group(1) if link_match else ""
+                        link = link_match.group(1) if link_match else clean_cols[7].strip()
                         
                         try:
                             item_id = int(clean_cols[0])

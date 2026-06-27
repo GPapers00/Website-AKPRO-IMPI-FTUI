@@ -12,3 +12,7 @@ npm-debug.log
 # Logs
 logs
 *.log
+
+# Python
+__pycache__/
+*.pyc
