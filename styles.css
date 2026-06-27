@@ -1292,6 +1292,29 @@ h6 {
   color: var(--bear-brown);
 }
 
+.more-information-section {
+  position: relative;
+  margin-top: 50px;
+  padding: 60px 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Open Opportunities ─────────────────────────────────────── */
+.country-openings-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+.opening-card {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
 /* ── Responsive Design ─────────────────────────────────────── */
 @media (max-width: 1024px) {
   .exchange-bottom-grid.dept-grid {
@@ -1899,6 +1922,11 @@ h6 {
     width: 95%;
     max-height: 90vh;
   }
+  
+  .modal-content {
+    padding: 16px;
+    gap: 16px;
+  }
 
   .uni-card {
     flex-direction: column;
@@ -1911,7 +1939,7 @@ h6 {
   }
 
   .more-information-section {
-    padding: 20px 12px;
+    padding: 60px 20px 20px 20px;
   }
 
   /* Force Instagram embed to scale down on small phones */

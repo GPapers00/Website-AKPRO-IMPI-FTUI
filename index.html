@@ -178,8 +178,7 @@
           style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; margin-top: 40px;">
 
           <!-- Box 1: PIPTEK Info -->
-          <div class="more-information-section glass-card animate-up delay-1"
-            style="position: relative; margin-top: 50px; padding: 60px 40px 40px 40px; display: flex; flex-direction: column;">
+          <div class="more-information-section glass-card animate-up delay-1">
             <div style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%);">
               <img src="assets/piptek.jpg" alt="PIPTEK Logo"
                 style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
@@ -200,8 +199,7 @@
           </div>
 
           <!-- Box 2: IMPI Official Account -->
-          <div class="more-information-section glass-card animate-up delay-2"
-            style="position: relative; margin-top: 50px; padding: 60px 40px 40px 40px; display: flex; flex-direction: column;">
+          <div class="more-information-section glass-card animate-up delay-2">
             <div style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%);">
               <img src="assets/logo-impi.webp" alt="IMPI Logo"
                 style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
@@ -526,8 +524,7 @@
         <button class="modal-close material-symbols-outlined" aria-label="Close Modal"
           id="asistensi-modal-close">close</button>
       </div>
-      <div class="modal-content" id="asistensi-modal-content"
-        style="padding: 32px; display: flex; flex-direction: column; gap: 16px;">
+      <div class="modal-content" id="asistensi-modal-content">
         <!-- Links will be injected here via JS -->
       </div>
     </div>
@@ -550,19 +547,16 @@
             placeholder="Search country, university, or program...">
         </div>
         <div class="openings-filters" style="display: flex; gap: 12px;">
-          <select id="openings-country-filter"
-            style="flex: 1; padding: 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-size: 1rem; color: var(--text-color); background-color: rgba(255, 255, 255, 0.7); outline: none; cursor: pointer; transition: all 0.3s ease;">
+          <select id="openings-country-filter" class="partner-search-input country-filter-select" style="flex: 1;">
             <option value="">All Countries</option>
           </select>
-          <select id="openings-status-filter"
-            style="flex: 1; padding: 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-size: 1rem; color: var(--text-color); background-color: rgba(255, 255, 255, 0.7); outline: none; cursor: pointer; transition: all 0.3s ease;">
+          <select id="openings-status-filter" class="partner-search-input country-filter-select" style="flex: 1;">
             <option value="">All Statuses</option>
           </select>
         </div>
       </div>
 
-      <div class="modal-content partner-content" id="openings-modal-content"
-        style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="modal-content" id="openings-modal-content">
         <!-- Openings will be injected here via JS -->
       </div>
     </div>
@@ -576,8 +570,7 @@
         <button class="modal-close material-symbols-outlined" aria-label="Close Modal"
           id="calendar-modal-close">close</button>
       </div>
-      <div class="modal-content" id="calendar-modal-content"
-        style="padding: 32px; display: flex; flex-direction: column; gap: 16px; max-height: 70vh; overflow-y: auto;">
+      <div class="modal-content" id="calendar-modal-content">
         <!-- Dynamically populated from Supabase -->
       </div>
     </div>
@@ -591,8 +584,7 @@
         <button class="modal-close material-symbols-outlined" aria-label="Close Modal"
           id="past-calendar-modal-close">close</button>
       </div>
-      <div class="modal-content" id="past-calendar-modal-content"
-        style="padding: 32px; display: flex; flex-direction: column; gap: 16px;">
+      <div class="modal-content" id="past-calendar-modal-content">
         <!-- Dynamically populated from Supabase -->
       </div>
     </div>
@@ -606,8 +598,7 @@
         <button class="modal-close material-symbols-outlined" aria-label="Close Modal"
           id="diktat-course-modal-close">close</button>
       </div>
-      <div class="modal-content" id="diktat-course-modal-content"
-        style="padding: 32px; display: flex; flex-direction: column; gap: 16px; max-height: 70vh; overflow-y: auto;">
+      <div class="modal-content" id="diktat-course-modal-content">
         <!-- Dynamically populated from Supabase diktat_courses -->
       </div>
     </div>
@@ -621,8 +612,7 @@
         <button class="modal-close material-symbols-outlined" aria-label="Close Modal"
           id="diktat-archive-modal-close">close</button>
       </div>
-      <div class="modal-content" id="diktat-archive-modal-content"
-        style="padding: 32px; display: flex; flex-direction: column; gap: 16px; max-height: 70vh; overflow-y: auto;">
+      <div class="modal-content" id="diktat-archive-modal-content">
         <!-- Dynamically populated from Supabase diktat_archive -->
       </div>
     </div>

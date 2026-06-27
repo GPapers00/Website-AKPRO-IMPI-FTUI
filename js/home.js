@@ -202,7 +202,7 @@ export function initHome() {
           ${flagHtml}
           <h3 style="margin:0; font-size: 24px; color: var(--bear-brown);">${country}</h3>
         </div>
-        <div class="country-openings-grid" style="display: grid; gap: 16px;"></div>
+        <div class="country-openings-grid"></div>
       `;
 
       const grid = countryGroup.querySelector('.country-openings-grid');
@@ -210,12 +210,7 @@ export function initHome() {
       groupedByCountry[country].forEach(item => {
         const card = document.createElement('div');
         card.className = 'opening-card';
-        card.style.background = 'rgba(255, 255, 255, 0.6)';
-        card.style.border = '1px solid rgba(255, 255, 255, 0.8)';
-        card.style.borderRadius = '12px';
-        card.style.padding = '20px';
-        card.style.boxShadow = '0 4px 15px rgba(0,0,0,0.05)';
-        
+                
         let html = `
           <div class="opening-header" style="margin-bottom: 12px;">
             <h4 class="opening-title" style="margin:0; font-size: 18px; color: var(--bear-brown);">${item.university}</h4>
