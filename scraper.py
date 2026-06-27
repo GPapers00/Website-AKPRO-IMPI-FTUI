@@ -63,6 +63,11 @@ def scrape_opportunities():
                     if 'faculty of law' in note_lower and 'engineering' not in note_lower:
                         is_excluded = True
                         
+                    # Filter for undergraduate level
+                    level_lower = clean_cols[6].lower()
+                    if 'undergraduate' not in level_lower:
+                        is_excluded = True
+                        
                     if not is_excluded:
                         # Find link if available
                         link_match = re.search(r'href=[\'"]?([^\'" >]+)', cols[7])
