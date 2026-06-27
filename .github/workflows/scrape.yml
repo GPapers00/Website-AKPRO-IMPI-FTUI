@@ -2,8 +2,8 @@ name: Daily Supabase Scraper
 
 on:
   schedule:
-    # Runs at 00:00 UTC every day
-    - cron: '0 0 * * *'
+    # Runs at 17:00 UTC every day, which is 00:00 WIB (Midnight Indonesia Time)
+    - cron: '0 17 * * *'
   workflow_dispatch: # Allows you to manually trigger the script from the Actions tab
 
 jobs:

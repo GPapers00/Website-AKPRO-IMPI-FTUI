@@ -8,65 +8,72 @@ This portal is designed to support International Program students in navigating 
 
 - **Modern & Responsive UI**: Built with a sleek "glassmorphism" aesthetic, subtle micro-animations, and dynamic headers. Fully optimized for both desktop and mobile devices.
 - **Academic Resources (Home Tab)**: 
-  - Direct access to Past Exam Archives (UAS/UTS) and Study Notes.
+  - Direct access to Past Exam Archives (UAS/UTS) and Study Notes via the Diktat module.
   - Academic Calendars for the current and past semesters.
   - Live Instagram feed preview for the latest updates and job opportunities.
 - **Student Exchange Hub (Exchange Tab)**:
   - **Partner Universities Directory**: A searchable and filterable database of international partner universities (e.g., University of Queensland, Monash University, University of Birmingham).
-  - Detailed pop-ups showing available majors, dual-degree schemes (e.g., 2+2, 3+1), intake periods, estimated costs, and scholarship information.
-  - Quick links to specific syllabus mapping documents.
+  - **Open Opportunities**: Live data of actively open exchange programs, automatically scraped from the UI International Office.
+  - Detailed pop-ups showing available majors, dual-degree schemes, intake periods, estimated costs, and scholarship information.
 - **Interactive Modals**: Includes an 'Asistensi' scheduling modal and a dynamic Partner Universities search with real-time country filtering.
-- **Appointment Booking**: Quick access to book consultation appointments with the academic center.
 
 ## Technology Stack
 
-### Frontend
+### Frontend (Serverless Architecture)
 - **HTML5**: Semantic structure and accessible layout.
 - **CSS3 (Vanilla)**: Custom styling utilizing CSS variables, Flexbox/Grid, media queries for responsiveness, and smooth `cubic-bezier` transitions.
-- **JavaScript (Vanilla)**: Handles tab navigation, dynamic modal rendering, search/filter algorithms, and scroll-event listeners.
+- **JavaScript (ES6 Modules)**: Highly modular vanilla JavaScript (`js/` directory) that handles tab navigation, dynamic modal rendering, search algorithms, and direct database querying.
 
-### Backend
-- **Node.js & Express**: Custom REST API server acting as a secure middleman.
-- **Supabase**: PostgreSQL database for managing Universities, Partners, Diktat, Asistensi, and Academic Calendars.
+### Database & Backend
+- **Supabase (PostgreSQL)**: Acts as a serverless backend. The frontend connects directly to Supabase using an Anonymous Key and Row-Level Security (RLS) to safely fetch Universities, Partners, Diktat, Asistensi, and Academic Calendars.
+
+### Data Automation
+- **Python Scraper**: A lightweight `scraper.py` script that periodically scrapes the UI International website for new Exchange Opportunities, filters out non-undergraduate programs, and directly updates the Supabase database.
 
 ## Project Structure
 
 ```text
 ├── index.html       # Main HTML document and layout structure
 ├── styles.css       # Core stylesheet with variables, animations, and responsive rules
-├── script.js        # Frontend logic for fetching data, modals, and UI interaction
-├── server.js        # Node.js/Express backend API server
-├── package.json     # Node.js dependencies
-├── .env             # (Not in repo) Supabase URL and API Keys
+├── js/              # Modular ES6 JavaScript files
+│   ├── main.js      # Entry point
+│   ├── supabase.js  # Supabase client initialization
+│   ├── navigation.js# Tab and scroll logic
+│   ├── home.js      # Open opportunities and calendar logic
+│   ├── exchange.js  # Partner universities and asistensi logic
+│   └── diktat.js    # Diktat archive logic
+├── scraper.py       # Python script for scraping exchange opportunities
+├── .env             # (Not in repo) Supabase URL and API Keys for scraper.py
 ├── assets/          # Directory containing all images, logos, and icons
-│   ├── logo.png     
-│   ├── crown.png
-│   └── ...          
 └── README.md        # Project documentation
 ```
 
 ## Getting Started
 
-This project utilizes a Client-Server architecture. You will need to run the Node.js server for the website to fetch data from Supabase successfully.
+Because the project now uses a serverless architecture with **ES6 Modules**, you no longer need a Node.js backend to run the website. However, you do need a basic local web server to bypass CORS restrictions for the ES6 `import` statements.
 
 1. Clone this repository:
    ```bash
    git clone https://github.com/GPapers00/Website-AKPRO-IMPI-FTUI.git
    ```
-2. Navigate to the project folder and install the required dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in the root directory and add your Supabase credentials:
+2. Open the folder in **Visual Studio Code**.
+3. Install the **"Live Server"** extension in VS Code.
+4. Right-click on `index.html` and select **"Open with Live Server"**.
+5. The website will automatically launch in your browser and connect to your Supabase database!
+
+### Updating Exchange Opportunities (Scraper)
+
+To run the python scraper and update your database with the latest open opportunities:
+1. Ensure you have Python installed.
+2. Create a `.env` file in the root directory and add your Supabase credentials (this is required for the scraper to write to the DB):
    ```env
    SUPABASE_URL=your_supabase_url
-   SUPABASE_KEY=your_supabase_anon_key
+   SUPABASE_KEY=your_supabase_service_role_key
    ```
-4. Start the backend server:
+3. Run the script:
    ```bash
-   node server.js
+   python scraper.py
    ```
-5. Open `index.html` in your favorite web browser (Chrome, Safari, Edge, Firefox) or run it through a local extension like Live Server. The website will dynamically fetch data from your local server at `http://localhost:3000`.
 
 ## About AKPRO IMPI FTUI
 
@@ -75,7 +82,3 @@ This project utilizes a Client-Server architecture. You will need to run the Nod
 ## License
 
 This project is created for the internal use of IMPI FTUI. All rights reserved.
-# Website-AKPRO
-# Website-AKPRO
-# Website-AKPRO
-# Website-AKPRO-IMPI-FTUI
