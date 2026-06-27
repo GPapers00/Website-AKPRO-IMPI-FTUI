@@ -114,6 +114,7 @@ export function initHome() {
     }
 
     try {
+      sessionStorage.removeItem('openingsData'); // Force clear cache so new scraper data shows up
       const cachedData = sessionStorage.getItem('openingsData');
       if (cachedData) {
         openingsData = JSON.parse(cachedData);
