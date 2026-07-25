@@ -66,11 +66,12 @@
       <!-- NAVIGATION TABS -->
       <nav class="header__tabs" id="header__tabs">
         <button class="tab-btn active" data-tab="home">Home</button>
+        <button class="tab-btn" data-tab="news">News</button>
         <button class="tab-btn" data-tab="asistensi">Asistensi</button>
         <button class="tab-btn" data-tab="diktat">Diktat</button>
-        <button class="tab-btn" data-tab="calendar">Academic Calendar</button>
-        <button class="tab-btn" data-tab="exchange">Exchange Information</button>
-        <button class="tab-btn" data-tab="contact">Contact Us</button>
+        <button class="tab-btn" data-tab="calendar">Calendar</button>
+        <button class="tab-btn" data-tab="exchange">Exchange</button>
+        <button class="tab-btn" data-tab="guidebooks">Guidebooks</button>
       </nav>
 
     </div>
@@ -134,22 +135,17 @@
           </div>
         </div>
 
-        <!-- Section 2: Shortcuts -->
-        <div class="home-shortcuts-section animate-up delay-2">
-          <h2 class="section-title" style="margin-bottom: 32px;">AKPRO's Information.</h2>
-          <div class="shortcuts-grid">
-            <button class="shortcut-btn glass-card"
-              onclick="document.querySelector('[data-tab=\'asistensi\']').click()">
-              <span class="material-symbols-outlined">menu_book</span>
-              <h3>Asistensi</h3>
-            </button>
-            <button class="shortcut-btn glass-card" onclick="document.querySelector('[data-tab=\'diktat\']').click()">
-              <span class="material-symbols-outlined">library_books</span>
-              <h3>Diktat</h3>
-            </button>
-            <button class="shortcut-btn glass-card" onclick="document.querySelector('[data-tab=\'exchange\']').click()">
-              <span class="material-symbols-outlined">public</span>
-              <h3>Exchange Information</h3>
+                        <!-- Section 2: Latest News Preview -->
+        <div class="home-news-section animate-up delay-2">
+          <h2 class="section-title" style="margin-bottom: 32px;">Latest News</h2>
+          <div id="home-news-container" class="bento-grid home-preview">
+            <!-- Dynamically injected via news.js -->
+            <p style="color: var(--text-muted); text-align: center; grid-column: 1 / -1;">Loading latest news...</p>
+          </div>
+          <div style="text-align: center; margin-top: 32px;">
+            <button class="appointment-btn" onclick="document.querySelector('[data-tab=\'news\']').click(); window.scrollTo({top:0, behavior:'smooth'})">
+              Read All News
+              <img src="assets/handclick.png" alt="Click" class="handclick-icon">
             </button>
           </div>
         </div>
@@ -433,44 +429,171 @@
     </section>
 
     <!-- ──────────────────────────────────────────
-         TAB 5: CONTACT US PAGE
+         TAB 5: ACADEMIC GUIDEBOOKS
          ────────────────────────────────────────── -->
-    <section class="tab-panel" id="panel-contact">
-      <!-- Custom Banner Placeholder -->
+    <section class="tab-panel" id="panel-guidebooks">
       <div class="tab-banner">
-        <!-- Add your banner image here later: <img src="your_banner.jpg" alt="Banner" loading="lazy"> -->
       </div>
-      <!-- Header -->
-      <h2 class="panel-header dynamic-header">Contact Us</h2>
-      <div class="contact-card-wrapper">
-        <div class="contact-card glass-card animate-up delay-1">
-          <h3>Get In Touch</h3>
-          <p>Reach out to us through our official channels below.</p>
-
-          <div class="contact-links">
-            <!-- Link 1: Instagram (Styled with Amethyst Glow) -->
-            <!-- Replace "#" with your actual Instagram URL -->
-            <a href="https://www.instagram.com/piptek.impi/" class="btn-social btn-instagram">
-              <!-- SVG Instagram Icon Placeholder -->
-              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-              </svg>
-              <span>@piptek.impi</span>
-            </a>
-
-            <!-- Link 2: Line (Styled with Cerulean Blue) -->
-            <!-- Replace "#" with your actual Line URL -->
-            <a href="#" class="btn-social btn-line">
-              <img src="assets/line_logo.png" alt="Line Logo" class="social-icon" style="object-fit: contain;">
-              <span>Line: </span>
-            </a>
+      <h2 class="panel-header dynamic-header">Academic Guidebooks</h2>
+      
+      <div class="guidebooks-container">
+        <a href="https://online.pubhtml5.com/sstc/gxuv/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Civil-Engineering.png" alt="Civil Engineering Guidebook" loading="lazy">
           </div>
-        </div>
+          <h3>Civil Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/chpc/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Environmental-Engineering.png" alt="Environmental Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Environmental Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/zmby/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Mechanical-Engineering.png" alt="Mechanical Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Mechanical Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/tqsk/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Naval-Engineering.png" alt="Naval Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Naval Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/yjeo/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Electrical-Engineering.png" alt="Electrical Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Electrical Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/kcli/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Computer-Engineering.png" alt="Computer Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Computer Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/ohqx/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Metallurgical-Engineering.png" alt="Metallurgical Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Metallurgical Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/gors/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Architecture.png" alt="Architecture Guidebook" loading="lazy">
+          </div>
+          <h3>Architecture</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/xfcd/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Chemical-Engineering.png" alt="Chemical Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Chemical Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/pgqu/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Bioprocess-Engineering.png" alt="Bioprocess Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Bioprocess Engineering</h3>
+        </a>
+        <a href="https://online.pubhtml5.com/sstc/yjpz/" target="_blank" class="guidebook-card glass-card animate-up">
+          <div class="guidebook-cover-wrapper">
+            <img src="https://international.eng.ui.ac.id/wp-content/uploads/194/2025/01/Cover-Industrial-Engineering.png" alt="Industrial Engineering Guidebook" loading="lazy">
+          </div>
+          <h3>Industrial Engineering</h3>
+        </a>
       </div>
     </section>
 
-  </main>
+              <!-- ── TAB: NEWS ─────────────────────────────────────────── -->
+      <section id="panel-news" class="tab-panel">
+        <div class="tab-banner">
+          <!-- Add your banner image here later: <img src="assets/banner_news.jpg" alt="News Banner" loading="lazy"> -->
+        </div>
+        <h2 class="panel-header dynamic-header">AKPRO News</h2>
+        <div id="news-tab-container" class="bento-grid">
+            <!-- Dynamically injected via news.js -->
+            <p style="color: var(--text-muted); text-align: center; grid-column: 1 / -1;">Loading news...</p>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <button id="load-more-news-btn" class="appointment-btn" style="display: none;">Load More</button>
+        </div>
+      </section>
+
+</main>
+
+  <!-- ==========================================
+       SITE FOOTER
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      
+      <!-- Column 1: Brand & Socials -->
+      <div class="footer-col brand-col">
+        <div class="footer-logos">
+          <img src="assets/logo-impi.webp" alt="IMPI Logo" loading="lazy">
+          <img src="assets/logo.png" alt="FT Logo" loading="lazy">
+        </div>
+        <p class="footer-desc">
+          AKPRO IMPI FTUI is a student-led division dedicated to advancing academic and professional development for Engineering students at Universitas Indonesia.
+        </p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/piptek.impi/" target="_blank" aria-label="Instagram" class="social-icon-link">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+          </a>
+          <a href="#" target="_blank" aria-label="LINE" class="social-icon-link">
+            <img src="assets/line_logo.png" alt="LINE" style="width: 24px; height: 24px; object-fit: contain;">
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col links-col">
+        <h3>QUICK LINKS</h3>
+        <ul class="footer-links">
+          <li><a href="#" onclick="document.querySelector('[data-tab=\'home\']').click(); window.scrollTo(0,0); return false;">Home</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-tab=\'news\']').click(); window.scrollTo(0,0); return false;">News</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-tab=\'diktat\']').click(); window.scrollTo(0,0); return false;">Diktat</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-tab=\'exchange\']').click(); window.scrollTo(0,0); return false;">Exchange</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-tab=\'asistensi\']').click(); window.scrollTo(0,0); return false;">Asistensi</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-tab=\'calendar\']').click(); window.scrollTo(0,0); return false;">Calendar</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-tab=\'guidebooks\']').click(); window.scrollTo(0,0); return false;">Guidebooks</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Resources -->
+      <div class="footer-col resources-col">
+        <h3>RESOURCES</h3>
+        <div class="footer-resources">
+          <a href="https://slcm.ui.ac.id/" target="_blank" class="resource-pill">SLCM <span class="material-symbols-outlined">open_in_new</span></a>
+          <a href="https://eng.ui.ac.id/" target="_blank" class="resource-pill">FTUI <span class="material-symbols-outlined">open_in_new</span></a>
+          <a href="https://international.ui.ac.id/" target="_blank" class="resource-pill">UI International <span class="material-symbols-outlined">open_in_new</span></a>
+          <a href="https://impiftui.netlify.app/" target="_blank" class="resource-pill">IMPI FTUI <span class="material-symbols-outlined">open_in_new</span></a>
+        </div>
+      </div>
+
+      <!-- Column 4: Contact -->
+      <div class="footer-col contact-col">
+        <h3>CONTACT</h3>
+        <div class="contact-item">
+          <span class="material-symbols-outlined">location_on</span>
+          <p>Faculty of Engineering, Universitas Indonesia, Depok, West Java</p>
+        </div>
+        <div class="contact-item">
+          <span class="material-symbols-outlined">mail</span>
+          <p><a href="mailto:academicsandprofession.impi@gmail.com">academicsandprofession.impi@gmail.com</a></p>
+        </div>
+      </div>
+      
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AKPRO IMPI FTUI. All rights reserved.</p>
+    </div>
+  </footer>
+
 
   <!-- External Script -->
   <!-- ==========================================
@@ -620,7 +743,22 @@
 
   <!-- Add Supabase Library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/main.js?v=3"></script>
+    <!-- ── NEWS MODAL ──────────────────────────────────────── -->
+    <div id="news-modal" class="modal-overlay" style="display: none; opacity: 0;">
+      <div class="news-modal-content">
+        <button class="news-modal-close" id="news-modal-close" aria-label="Close News Modal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        <img id="news-modal-image" src="" alt="News Poster" class="news-modal-image">
+        <div class="news-modal-body">
+          <span id="news-modal-date" class="news-date" style="color: var(--bear-brown);"></span>
+          <h2 id="news-modal-title" style="margin-bottom: 16px; font-weight: 800; color: var(--bear-brown);"></h2>
+          <div id="news-modal-text" style="font-size: 16px; line-height: 1.6; white-space: pre-wrap;"></div>
+        </div>
+      </div>
+    </div>
+<script type="module" src="js/news.js"></script>
 </body>
 
 </html>

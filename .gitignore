@@ -16,3 +16,6 @@ logs
 # Python
 __pycache__/
 *.pyc
+
+# Scratch files
+scratch_*

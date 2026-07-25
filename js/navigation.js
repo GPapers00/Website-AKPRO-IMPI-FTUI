@@ -55,6 +55,7 @@ export function initNavigation() {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
       switchTab(targetTab, true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 
@@ -75,12 +76,12 @@ export function initNavigation() {
     window.history.replaceState(null, null, isLocal ? '#home' : '/home');
   }
 
-  // ── Logo Navigation Logic ───────────────────────────────────
   const logoBtn = document.getElementById('logo-btn');
   if (logoBtn) {
     logoBtn.addEventListener('click', (e) => {
       e.preventDefault();
       switchTab('home', true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 

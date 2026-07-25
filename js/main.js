@@ -3,7 +3,7 @@ import { initNavigation } from './navigation.js';
 import { initExchange } from './exchange.js';
 import { initDiktat } from './diktat.js';
 import { initSyllabi } from './syllabi.js';
-import { initHome } from './home.js';
+import { initHome } from './home.js?v=3';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();

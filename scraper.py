@@ -95,10 +95,19 @@ def scrape_opportunities():
                         if expired:
                             continue
                             
+                        country = clean_cols[2]
+                        c_lower = country.lower().strip()
+                        if c_lower in ('republic of czech', 'czech'):
+                            country = 'Czech Republic'
+                        elif c_lower == 'swiss':
+                            country = 'Switzerland'
+                        elif c_lower in ('p.r china', 'p.r. china', "people's republic of china"):
+                            country = 'China'
+                        
                         opportunities.append({
                             "id": item_id,
                             "program_name": clean_cols[1],
-                            "country": clean_cols[2],
+                            "country": country,
                             "university": clean_cols[3],
                             "deadline": deadline_str,
                             "period": clean_cols[5],
@@ -155,9 +164,296 @@ def update_supabase(opportunities):
     except Exception as e:
         print(f"Error inserting data: {e}")
 
+def scrape_partnerships():
+    print("Scraping https://international.ui.ac.id/studex-partnershipslist/ ...")
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+
+    url = 'https://international.ui.ac.id/studex-partnershipslist/'
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    
+    try:
+        html = urllib.request.urlopen(req, context=ctx).read().decode('utf-8')
+    except Exception as e:
+        print(f"Error fetching partnerships page: {e}")
+        return []
+        
+    COUNTRY_CODE_MAP = {
+        "armenia": "am", "bosnia & herzegovina": "ba", "czech republic": "cz",
+        "finland": "fi", "georgia": "ge", "france": "fr", "italy": "it",
+        "india": "in", "kazakhstan": "kz", "malaysia": "my", "netherlands": "nl",
+        "people's republic of china": "cn", "lithuania": "lt", "mexico": "mx",
+        "norway": "no", "new zealand": "nz", "philippines": "ph",
+        "republic of korea": "kr", "republic of turkey": "tr", "russia": "ru",
+        "singapore": "sg", "spain": "es", "sweden": "se", "switzerland": "ch",
+        "taiwan": "tw", "thailand": "th", "united kingdom": "gb",
+        "united states of america": "us", "vietnam": "vn", "australia": "au",
+        "austria": "at", "belgium": "be", "canada": "ca", "croatia": "hr",
+        "denmark": "dk", "estonia": "ee", "germany": "de", "japan": "jp",
+        "portugal": "pt", "republic of ireland": "ie", "republic of poland": "pl",
+        "romania": "ro", "franace": "fr", "united states": "us"
+    }
+
+    rows = re.findall(r'<tr data-row_id=.*?>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
+    
+    country_dict = {}
+    
+    for row in rows:
+        cols = re.findall(r'<t[dh].*?>(.*?)</t[dh]>', row, re.DOTALL | re.IGNORECASE)
+        if len(cols) >= 4:
+            clean_cols = []
+            for c in cols:
+                text = re.sub(r'<[^>]+>', '', c).strip()
+                text = text.replace('&amp;', '&').replace('&#8211;', '-').replace('&#8217;', "'")
+                clean_cols.append(text)
+            
+            country = clean_cols[0]
+            university = clean_cols[1]
+            period = clean_cols[3]
+            
+            if not country or not university or 'University' in country:
+                continue # Skip header row or empty
+                
+            if country not in country_dict:
+                c_code = COUNTRY_CODE_MAP.get(country.lower(), "un")
+                country_dict[country] = {
+                    "country": country,
+                    "code": c_code,
+                    "universities": []
+                }
+            
+            country_dict[country]["universities"].append({
+                "name": university,
+                "period": period
+            })
+            
+    return list(country_dict.values())
+
+def fetch_existing_partners(supabase_url, supabase_key, ctx):
+    url = f"{supabase_url}/rest/v1/global_partners?select=*"
+    req = urllib.request.Request(url, headers={
+        'apikey': supabase_key,
+        'Authorization': f'Bearer {supabase_key}'
+    })
+    try:
+        response = urllib.request.urlopen(req, context=ctx).read().decode('utf-8')
+        return json.loads(response)
+    except Exception as e:
+        print(f"Error fetching existing partners: {e}")
+        return None
+
+def update_partners_supabase(partners):
+    env_vars = load_env()
+    supabase_url = env_vars.get("SUPABASE_URL") or os.environ.get("SUPABASE_URL")
+    supabase_key = env_vars.get("SUPABASE_KEY") or os.environ.get("SUPABASE_KEY")
+    
+    if not supabase_url or not supabase_key:
+        print("Error: SUPABASE_URL or SUPABASE_KEY not found in .env file or environment.")
+        return
+
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    
+    existing_partners = fetch_existing_partners(supabase_url, supabase_key, ctx)
+    if existing_partners is None:
+        print("Could not fetch existing partners, aborting update to be safe.")
+        return
+        
+    def get_fingerprint(data_list):
+        fingerprint = set()
+        for item in data_list:
+            country = item.get("country", "")
+            code = item.get("code", "")
+            for uni in item.get("universities", []):
+                fingerprint.add((country, code, uni.get("name", ""), uni.get("period", "")))
+        return fingerprint
+        
+    scraped_fp = get_fingerprint(partners)
+    existing_fp = get_fingerprint(existing_partners)
+    
+    if scraped_fp == existing_fp:
+        print("No changes detected in partnerships. Skipping update.")
+        return
+        
+    print(f"Changes detected in partnerships. Updating Supabase with {len(partners)} countries...")
+    
+    # 1. Delete all existing rows
+    # Using id=gt.0 to safely delete all rows
+    delete_url = f"{supabase_url}/rest/v1/global_partners?id=gt.0"
+    delete_req = urllib.request.Request(delete_url, method='DELETE')
+    delete_req.add_header('apikey', supabase_key)
+    delete_req.add_header('Authorization', f'Bearer {supabase_key}')
+    try:
+        urllib.request.urlopen(delete_req, context=ctx)
+        print("Cleared old partnerships data.")
+    except Exception as e:
+        print(f"Warning/Error clearing old partnerships data: {e}")
+
+    # 2. Insert new rows
+    if not partners:
+        print("No partners to insert.")
+        return
+        
+    insert_url = f"{supabase_url}/rest/v1/global_partners"
+    data = json.dumps(partners).encode('utf-8')
+    insert_req = urllib.request.Request(insert_url, data=data, method='POST')
+    insert_req.add_header('apikey', supabase_key)
+    insert_req.add_header('Authorization', f'Bearer {supabase_key}')
+    insert_req.add_header('Content-Type', 'application/json')
+    insert_req.add_header('Prefer', 'return=minimal')
+    
+    try:
+        urllib.request.urlopen(insert_req, context=ctx)
+        print("Successfully updated Supabase with fresh partnerships data!")
+    except Exception as e:
+        print(f"Error inserting partnerships data: {e}")
+
+def scrape_syllabi():
+    print("Scraping https://international.eng.ui.ac.id/syllabus/ ...")
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    
+    req = urllib.request.Request("https://international.eng.ui.ac.id/syllabus/", headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        html = urllib.request.urlopen(req, context=ctx).read().decode('utf-8')
+    except Exception as e:
+        print(f"Error fetching syllabi: {e}")
+        return []
+        
+    syllabi = []
+    a_tags = re.findall(r'<a([^>]*)>(.*?)</a>', html, re.IGNORECASE | re.DOTALL)
+    for a_attrs, a_content in a_tags:
+        if 'href' in a_attrs and '<img' in a_content:
+            href_match = re.search(r'href=[\'\"]([^\'\"]+\.pdf)[\'\"]', a_attrs, re.IGNORECASE)
+            src_match = re.search(r'src=[\'\"]([^\'\"]+)[\'\"]', a_content, re.IGNORECASE)
+            title_match = re.search(r'title=[\'\"]([^\'\"]+)[\'\"]', a_content, re.IGNORECASE)
+            
+            if href_match and src_match and title_match:
+                url = href_match.group(1)
+                image_url = src_match.group(1)
+                title = title_match.group(1)
+                
+                # Cleanup title
+                title = re.sub(r'^\d+\.\s*', '', title).strip()
+                if title == 'Queensland University of Tech':
+                    title = 'Queensland University of Technology'
+                elif title == 'University of Stratchlyde':
+                    title = 'University of Strathclyde'
+                elif title == 'University of Duisburg-Essen':
+                    title = 'University Duisburg-Essen'
+                    
+                asset_map = {
+                    'University of Queensland': 'assets/UQ.webp',
+                    'Monash University': 'assets/monash.png',
+                    'Queensland University of Technology': 'assets/qut.png',
+                    'Curtin University': 'assets/Curtin.png',
+                    'University of Glasgow': 'assets/glasglow.jpg',
+                    'University of Birmingham': 'assets/birmingham.webp',
+                    'University of Strathclyde': 'assets/strathclyde.png',
+                    'University of Sydney': 'assets/sydney.svg',
+                    'University Duisburg-Essen': 'assets/duisburg.png'
+                }
+                
+                image_url = asset_map.get(title, image_url)
+                    
+                syllabi.append({
+                    "name": title,
+                    "url": url,
+                    "image_url": image_url,
+                    "status": "available"
+                })
+                
+    return syllabi
+
+def fetch_existing_syllabi(supabase_url, supabase_key):
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    url = f"{supabase_url}/rest/v1/syllabus_mapping?select=name,url,image_url,status"
+    req = urllib.request.Request(url, headers={'apikey': supabase_key, 'Authorization': f'Bearer {supabase_key}'})
+    try:
+        res = urllib.request.urlopen(req, context=ctx).read().decode('utf-8')
+        return json.loads(res)
+    except Exception as e:
+        print(f"Warning: could not fetch existing syllabi ({e})")
+        return []
+
+def update_syllabi_supabase(syllabi):
+    env_vars = load_env()
+    supabase_url = env_vars.get("SUPABASE_URL") or os.environ.get("SUPABASE_URL")
+    supabase_key = env_vars.get("SUPABASE_KEY") or os.environ.get("SUPABASE_KEY")
+    
+    if not supabase_url or not supabase_key:
+        print("Error: SUPABASE_URL or SUPABASE_KEY not found.")
+        return
+
+    existing = fetch_existing_syllabi(supabase_url, supabase_key)
+    existing_available = [x for x in existing if x.get('status') == 'available']
+    
+    def get_fp(data_list):
+        return set((x.get('name', ''), x.get('url', ''), x.get('image_url', '')) for x in data_list)
+        
+    scraped_fp = get_fp(syllabi)
+    existing_fp = get_fp(existing_available)
+    
+    if scraped_fp == existing_fp:
+        print("No changes detected in syllabi. Skipping update.")
+        return
+        
+    print(f"Changes detected. Updating Supabase with {len(syllabi)} syllabi...")
+    
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    
+    # Delete old available syllabi
+    delete_url = f"{supabase_url}/rest/v1/syllabus_mapping?status=eq.available"
+    delete_req = urllib.request.Request(delete_url, method='DELETE')
+    delete_req.add_header('apikey', supabase_key)
+    delete_req.add_header('Authorization', f'Bearer {supabase_key}')
+    try:
+        urllib.request.urlopen(delete_req, context=ctx)
+        print("Cleared old available syllabi data.")
+    except Exception as e:
+        print(f"Warning/Error clearing old syllabi data: {e}")
+
+    if not syllabi:
+        print("No syllabi to insert.")
+        return
+        
+    # Insert new rows
+    insert_url = f"{supabase_url}/rest/v1/syllabus_mapping"
+    data = json.dumps(syllabi).encode('utf-8')
+    insert_req = urllib.request.Request(insert_url, data=data, method='POST')
+    insert_req.add_header('apikey', supabase_key)
+    insert_req.add_header('Authorization', f'Bearer {supabase_key}')
+    insert_req.add_header('Content-Type', 'application/json')
+    insert_req.add_header('Prefer', 'return=minimal')
+    
+    try:
+        urllib.request.urlopen(insert_req, context=ctx)
+        print("Successfully updated Supabase with fresh syllabi data!")
+    except Exception as e:
+        print(f"Error inserting syllabi data: {e}")
+
 if __name__ == '__main__':
     try:
-        data = scrape_opportunities()
-        update_supabase(data)
+        print("--- Opportunities Scraper ---")
+        opp_data = scrape_opportunities()
+        update_supabase(opp_data)
+        
+        print("\n--- Partnerships Scraper ---")
+        partners_data = scrape_partnerships()
+        if partners_data is not None:
+            update_partners_supabase(partners_data)
+            
+        print("\n--- Syllabi Scraper ---")
+        syllabi_data = scrape_syllabi()
+        if syllabi_data is not None:
+            update_syllabi_supabase(syllabi_data)
+            
     except Exception as e:
         print(f"Scraper failed: {e}")

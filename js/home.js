@@ -186,7 +186,9 @@ export function initHome() {
         'denmark': 'dk', 'finland': 'fi', 'belgium': 'be', 'austria': 'at',
         'ireland': 'ie', 'brazil': 'br', 'mexico': 'mx', 'argentina': 'ar',
         'chile': 'cl', 'russia': 'ru', 'turkey': 'tr', 'saudi arabia': 'sa',
-        'uae': 'ae', 'united arab emirates': 'ae', 'south africa': 'za', 'egypt': 'eg'
+        'uae': 'ae', 'united arab emirates': 'ae', 'south africa': 'za', 'egypt': 'eg',
+        'swiss': 'ch', 'republic of czech': 'cz', 'czech': 'cz', 'czech republic': 'cz', 'p.r china': 'cn', 
+        "people's republic of china": 'cn'
       };
       return map[countryName.toLowerCase().trim()] || '';
     };
