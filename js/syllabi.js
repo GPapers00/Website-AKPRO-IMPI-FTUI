@@ -20,7 +20,7 @@ export function initSyllabi() {
             html += `<a href="${item.url}" target="_blank" class="syllabi-circle-card"><div class="circle-logo"><img src="${item.image_url}" alt="${item.name}" loading="lazy"></div><p>${item.name}</p></a>`;
           }
         });
-        syllabiContainer.innerHTML = html;
+        syllabiContainer.innerHTML = DOMPurify.sanitize(html);
       }
     } catch (error) {
       console.error("Error fetching syllabus mapping:", error);

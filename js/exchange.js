@@ -58,7 +58,7 @@ export function initExchange() {
             `;
           });
         }
-        modalContent.innerHTML = htmlContent;
+        modalContent.innerHTML = DOMPurify.sanitize(htmlContent);
         uniModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       });
@@ -122,7 +122,7 @@ export function initExchange() {
         html += `<li class="country-univ-item"><span class="univ-name">${univ.name}</span><span class="univ-period"><span class="material-symbols-outlined">schedule</span> Validity: ${univ.period}</span></li>`;
       });
       html += `</ul>`;
-      card.innerHTML = html;
+      card.innerHTML = DOMPurify.sanitize(html);
       partnerContent.appendChild(card);
     });
   };

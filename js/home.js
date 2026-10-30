@@ -85,8 +85,8 @@ export function initHome() {
           }
         });
 
-        if (calendarModalContent) calendarModalContent.innerHTML = currentHtml;
-        if (pastCalendarModalContent) pastCalendarModalContent.innerHTML = pastHtml;
+        if (calendarModalContent) calendarModalContent.innerHTML = DOMPurify.sanitize(currentHtml);
+        if (pastCalendarModalContent) pastCalendarModalContent.innerHTML = DOMPurify.sanitize(pastHtml);
       }
     } catch (error) {
       console.error("Error fetching academic calendar:", error);
@@ -242,7 +242,7 @@ export function initHome() {
           html += `<span class="opening-link" style="display: inline-block; margin-top: 12px; padding: 8px 16px; background: var(--text-muted); color: white; border-radius: 6px; text-align: center; font-weight: 500; cursor:not-allowed;">Link Coming Soon</span>`;
         }
         html += `</div>`;
-        card.innerHTML = html;
+        card.innerHTML = DOMPurify.sanitize(html);
         grid.appendChild(card);
       });
       openingsContent.appendChild(countryGroup);

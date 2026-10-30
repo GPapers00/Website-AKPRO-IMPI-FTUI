@@ -126,7 +126,7 @@ async function fetchHomeNews() {
     data.forEach((item, index) => {
       html += createNewsCardHTML(item, index, true);
     });
-    homeNewsContainer.innerHTML = html;
+    homeNewsContainer.innerHTML = DOMPurify.sanitize(html);
 
   } catch (err) {
     console.error("Error fetching home news:", err);
@@ -177,7 +177,7 @@ async function fetchNewsTab() {
     });
     
     // Append to existing HTML
-    newsTabContainer.insertAdjacentHTML('beforeend', html);
+    newsTabContainer.insertAdjacentHTML('beforeend', DOMPurify.sanitize(html));
 
     currentNewsPage++;
 

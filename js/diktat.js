@@ -41,7 +41,7 @@ export function initDiktat() {
       } else {
         html = '<div style="text-align:center;"><p>No courses listed yet.</p></div>';
       }
-      diktatCourseContent.innerHTML = html;
+      diktatCourseContent.innerHTML = DOMPurify.sanitize(html);
     } catch (err) {
       console.error(err);
       diktatCourseContent.innerHTML = '<div style="text-align:center;"><p>Failed to load courses.</p></div>';
@@ -76,7 +76,7 @@ export function initDiktat() {
       } else {
         html = '<div style="text-align:center;"><p>No archives listed yet.</p></div>';
       }
-      diktatArchiveContent.innerHTML = html;
+      diktatArchiveContent.innerHTML = DOMPurify.sanitize(html);
     } catch (err) {
       console.error(err);
       diktatArchiveContent.innerHTML = '<div style="text-align:center;"><p>Failed to load archives.</p></div>';
@@ -116,7 +116,7 @@ export function initDiktat() {
           html += `<a href="#" class="main-info-card glass-card animate-up delay-${topItems.length + index + 1} diktat-bottom-item" style="display: block; text-decoration: none; color: inherit; width: 100%;"><h3>${item.title}</h3><div class="image-link-wrapper" style="margin-bottom: 0;"><img src="${item.image_url}" alt="${item.title}" class="landscape-image top-focus" loading="lazy"></div></a>`;
         });
         html += '</div>';
-        diktatContainer.innerHTML = html;
+        diktatContainer.innerHTML = DOMPurify.sanitize(html);
         document.querySelectorAll('.diktat-top-item').forEach(el => { el.addEventListener('click', (e) => { e.preventDefault(); openDiktatCourseModal(el.getAttribute('data-title')); }); });
         document.querySelectorAll('.diktat-bottom-item').forEach(el => { el.addEventListener('click', (e) => { e.preventDefault(); openDiktatArchiveModal(); }); });
       }
